@@ -5,101 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xpertz Tutorials</title>
     <link rel="stylesheet" href="css/style.css">
-    <script defer src="js/script.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- HEADER -->
     <header>
-        <nav class="navbar">
-            <div class="logo">
-                <img src="assets/xpertz-logo.png" alt="Xpertz Logo">
-            </div>
-            <ul class="nav-links">
-                <li><a href="#classes">Classes</a></li>
-                <li><a href="#notes">Notes</a></li>
-                <li><a href="#achievements">Achievements</a></li>
-            </ul>
-            <button id="darkModeToggle">🌙</button>
-        </nav>
+        <div class="container">
+            <img src="assets/xpertz-logo.png" alt="Xpertz Logo" class="logo">
+            <nav>
+                <ul>
+                    <li><button class="scroll-btn" data-target="#classes">Classes</button></li>
+                    <li><button class="scroll-btn" data-target="#achievements">Achievements</button></li>
+                    <li><button class="scroll-btn" data-target="#notes">Notes</button></li>
+                    <li><button id="darkModeToggle">Dark Mode</button></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <!-- HERO SECTION -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Welcome to Xpertz Tutorials</h1>
-            <p>Interactive learning for all classes. Professional, elegant, and effective.</p>
-            <div class="cta-buttons">
-                <a href="#classes" class="btn-primary">Explore Classes</a>
-                <a href="#notes" class="btn-secondary">View Notes</a>
-            </div>
+            <h1>Learn Smarter with <span>Xpertz</span></h1>
+            <p>Interactive tutorials for Class 3-10. Guaranteed improvement, trusted by parents.</p>
+            <button class="cta-btn scroll-btn" data-target="#classes">Explore Classes</button>
         </div>
     </section>
 
-    <!-- CLASSES SECTION -->
     <section id="classes" class="classes-section">
-        <h2>Classes 3-8 (All Subjects)</h2>
-        <div class="tiles-container">
-            <div class="tile">
-                <img src="https://via.placeholder.com/250x150" alt="Placeholder">
-                <h3>Mathematics</h3>
-                <button class="btn-tile">View Lessons</button>
+        <div class="container">
+            <h2>Class 3-8 (All Subjects)</h2>
+            <div class="tiles-carousel">
+                <div class="tile"><img src="assets/placeholder1.jpg" alt=""><h3>Math</h3></div>
+                <div class="tile"><img src="assets/placeholder2.jpg" alt=""><h3>Science</h3></div>
+                <div class="tile"><img src="assets/placeholder3.jpg" alt=""><h3>English</h3></div>
+                <div class="tile"><img src="assets/placeholder1.jpg" alt=""><h3>Social Studies</h3></div>
+                <div class="tile"><img src="assets/placeholder2.jpg" alt=""><h3>Computer</h3></div>
             </div>
-            <div class="tile">
-                <img src="https://via.placeholder.com/250x150" alt="Placeholder">
-                <h3>Science</h3>
-                <button class="btn-tile">View Lessons</button>
-            </div>
-            <div class="tile">
-                <img src="https://via.placeholder.com/250x150" alt="Placeholder">
-                <h3>English</h3>
-                <button class="btn-tile">View Lessons</button>
-            </div>
-            <!-- Add more tiles as needed -->
-        </div>
 
-        <h2>Classes 9-10 (English & Social Science)</h2>
-        <div class="tiles-container">
-            <div class="tile">
-                <img src="https://via.placeholder.com/250x150" alt="Placeholder">
-                <h3>English</h3>
-                <button class="btn-tile">View Lessons</button>
-            </div>
-            <div class="tile">
-                <img src="https://via.placeholder.com/250x150" alt="Placeholder">
-                <h3>Social Science</h3>
-                <button class="btn-tile">View Lessons</button>
+            <h2>Class 9-10 (English & Social Studies)</h2>
+            <div class="tiles-carousel">
+                <div class="tile"><img src="assets/placeholder3.jpg" alt=""><h3>English</h3></div>
+                <div class="tile"><img src="assets/placeholder1.jpg" alt=""><h3>Social Studies</h3></div>
+                <div class="tile"><img src="assets/placeholder2.jpg" alt=""><h3>English Literature</h3></div>
+                <div class="tile"><img src="assets/placeholder3.jpg" alt=""><h3>History</h3></div>
             </div>
         </div>
     </section>
 
-    <!-- NOTES SECTION -->
-    <section id="notes" class="notes-section">
-        <h2>Notes Section (Coming Soon)</h2>
-        <p>All notes will be displayed here. Stay tuned!</p>
-    </section>
-
-    <!-- ACHIEVEMENTS SECTION -->
     <section id="achievements" class="achievements-section">
-        <h2>Our Achievements</h2>
-        <div class="achievement-tiles">
-            <div class="achievement-tile">
-                <h3>Guaranteed Improvement</h3>
-                <p>Boost your grades effectively.</p>
-            </div>
-            <div class="achievement-tile">
-                <h3>Trusted by 250+ Parents</h3>
-                <p>Students love learning here.</p>
-            </div>
-            <div class="achievement-tile">
-                <h3>Professional Tutors</h3>
-                <p>Experienced and engaging instructors.</p>
+        <div class="container">
+            <h2>Our Achievements</h2>
+            <div class="achievements-cards">
+                <div class="achievement-card">
+                    <h3>Guaranteed Improvement</h3>
+                    <p>We focus on measurable results for every student.</p>
+                </div>
+                <div class="achievement-card">
+                    <h3>Trusted by 250+ Parents</h3>
+                    <p>Our community keeps growing every day.</p>
+                </div>
+                <div class="achievement-card">
+                    <h3>Interactive Learning</h3>
+                    <p>Video, quizzes, and live sessions make learning fun.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <section id="notes" class="notes-section">
+        <div class="container">
+            <h2>Notes Section</h2>
+            <p>Coming soon: Downloadable notes and resources for all classes.</p>
+        </div>
+    </section>
+
     <footer>
-        <p>&copy; 2025 Xpertz Tutorials. All rights reserved.</p>
+        <div class="container">
+            <p>&copy; 2025 Xpertz Tutorials. All Rights Reserved.</p>
+        </div>
     </footer>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
