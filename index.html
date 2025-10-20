@@ -1,93 +1,389 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xpertz Tutorials</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="xpertz-logo.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xpertz Tutorials</title>
+<link rel="icon" href="xpertz-logo.png">
+<style>
+/* Google Fonts - elegant professional */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@400;600;700&display=swap');
+
+:root {
+    --primary-color: #1a73e8;
+    --secondary-color: #ffffff;
+    --background-color: #f9f9f9;
+    --text-color: #333333;
+    --dark-background: #121212;
+    --dark-text: #e0e0e0;
+    --tile-bg: #ffffff;
+    --dark-tile-bg: #1f1f1f;
+    --achievement-bg: #e0f7fa;
+    --dark-achievement-bg: #263238;
+    --transition-speed: 0.3s;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+body.dark-mode {
+    background-color: var(--dark-background);
+    color: var(--dark-text);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    background-color: var(--secondary-color);
+    z-index: 1000;
+    transition: background-color var(--transition-speed);
+}
+
+body.dark-mode header {
+    background-color: #1c1c1c;
+}
+
+.logo img {
+    height: 50px;
+}
+
+nav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 500;
+    position: relative;
+    transition: color var(--transition-speed);
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background-color: var(--primary-color);
+    left: 0;
+    bottom: -4px;
+    transition: width 0.3s;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+.dark-toggle {
+    cursor: pointer;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    background-color: transparent;
+    color: var(--primary-color);
+    font-weight: 600;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.dark-toggle:hover {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+body.dark-mode .dark-toggle {
+    color: #80d8ff;
+    border-color: #80d8ff;
+}
+
+body.dark-mode .dark-toggle:hover {
+    background-color: #80d8ff;
+    color: var(--dark-background);
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    background: linear-gradient(135deg, #1a73e8, #4285f4);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    animation: fadeInUp 1s ease forwards;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    animation: fadeInUp 1.2s ease forwards;
+}
+
+.hero .btn {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 50px;
+    background-color: #fff;
+    color: #1a73e8;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: fadeInUp 1.4s ease forwards;
+}
+
+.hero .btn:hover {
+    background-color: #f1f1f1;
+}
+
+/* Tile Section */
+.section {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+.tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.tile {
+    background-color: var(--tile-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+body.dark-mode .tile {
+    background-color: var(--dark-tile-bg);
+}
+
+.tile:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+}
+
+.tile img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.tile h3 {
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* Auto-scroll tiles animation */
+.tiles-wrapper {
+    overflow: hidden;
+    position: relative;
+}
+
+.tiles-inner {
+    display: flex;
+    gap: 1.5rem;
+    animation: scrollTiles 20s linear infinite;
+}
+
+@keyframes scrollTiles {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Achievement Section */
+.achievements {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 4rem 2rem;
+    background-color: var(--achievement-bg);
+    border-radius: 15px;
+    gap: 1rem;
+    margin: 4rem 2rem;
+    flex-wrap: wrap;
+    transition: background-color var(--transition-speed);
+}
+
+body.dark-mode .achievements {
+    background-color: var(--dark-achievement-bg);
+}
+
+.achievement {
+    text-align: center;
+    flex: 1 1 200px;
+    margin: 1rem;
+    padding: 2rem;
+    border-radius: 15px;
+    background-color: rgba(255,255,255,0.1);
+    transition: transform 0.3s;
+}
+
+.achievement h2 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.achievement p {
+    font-weight: 500;
+}
+
+/* Sections */
+.section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+body.dark-mode .section h2 {
+    color: #e0e0e0;
+}
+
+.section-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.9rem;
+    background-color: #1c1c1c;
+    color: #ccc;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media(max-width:768px) {
+    .hero h1 { font-size: 2.2rem; }
+    .hero p { font-size: 1rem; }
+    .achievements { flex-direction: column; }
+}
+</style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="logo">
-            <img src="xpertz-logo.png" alt="Xpertz Tutorials">
+<header>
+    <div class="logo"><img src="xpertz-logo.png" alt="Xpertz Logo"></div>
+    <nav>
+        <a href="#classes3-8">Classes 3-8</a>
+        <a href="#classes9-10">Classes 9-10</a>
+        <a href="#achievements">Achievements</a>
+        <button class="dark-toggle" id="darkToggle">Dark Mode</button>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Welcome to Xpertz Tutorials</h1>
+    <p>Interactive learning for students from Class 3 to 10</p>
+    <button class="btn" onclick="scrollToSection('classes3-8')">Explore Classes 3-8</button>
+</section>
+
+<section class="section" id="classes3-8">
+    <h2>Classes 3-8 - All Subjects</h2>
+    <div class="tiles-wrapper">
+        <div class="tiles-inner">
+            <div class="tile"><img src="placeholder1.jpg" alt=""><h3>Math</h3></div>
+            <div class="tile"><img src="placeholder2.jpg" alt=""><h3>Science</h3></div>
+            <div class="tile"><img src="placeholder3.jpg" alt=""><h3>English</h3></div>
+            <div class="tile"><img src="placeholder1.jpg" alt=""><h3>History</h3></div>
+            <div class="tile"><img src="placeholder2.jpg" alt=""><h3>Geography</h3></div>
+            <div class="tile"><img src="placeholder3.jpg" alt=""><h3>Arts</h3></div>
+            <!-- Repeat to fill scrolling -->
+            <div class="tile"><img src="placeholder1.jpg" alt=""><h3>Math</h3></div>
+            <div class="tile"><img src="placeholder2.jpg" alt=""><h3>Science</h3></div>
         </div>
-        <nav>
-            <ul>
-                <li><button class="nav-btn" onclick="scrollToSection('classes')">Classes</button></li>
-                <li><button class="nav-btn" onclick="scrollToSection('notes')">Notes</button></li>
-                <li><button class="nav-btn" onclick="scrollToSection('achievements')">Achievements</button></li>
-                <li><button class="nav-btn" id="darkModeToggle">Dark Mode</button></li>
-            </ul>
-        </nav>
-    </header>
+    </div>
+</section>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-text">
-            <h1>Welcome to Xpertz Tutorials</h1>
-            <p>Learn better. Achieve more. Trusted by hundreds of parents and students.</p>
-            <button class="cta-btn">Get Started</button>
-        </div>
-        <div class="hero-image">
-            <img src="placeholder1.jpg" alt="Learning Illustration">
-        </div>
-    </section>
+<section class="section" id="classes9-10">
+    <h2>Classes 9-10 - English & Social Studies</h2>
+    <div class="section-content">
+        <div class="tile"><img src="placeholder1.jpg" alt=""><h3>English Literature</h3></div>
+        <div class="tile"><img src="placeholder2.jpg" alt=""><h3>Grammar</h3></div>
+        <div class="tile"><img src="placeholder3.jpg" alt=""><h3>History</h3></div>
+        <div class="tile"><img src="placeholder1.jpg" alt=""><h3>Political Science</h3></div>
+    </div>
+</section>
 
-    <!-- Classes Section -->
-    <section id="classes" class="classes">
-        <h2>Our Classes</h2>
-        <div class="class-grid">
-            <div class="class-card">
-                <h3>Class 3-8 (All Subjects)</h3>
-                <img src="placeholder2.jpg" alt="Class 3-8">
-                <button class="card-btn">Explore</button>
-            </div>
-            <div class="class-card">
-                <h3>Class 9-10 (English & Social Science)</h3>
-                <img src="placeholder3.jpg" alt="Class 9-10">
-                <button class="card-btn">Explore</button>
-            </div>
-        </div>
-    </section>
+<section class="achievements" id="achievements">
+    <div class="achievement">
+        <h2>250+</h2>
+        <p>Trusted Parents</p>
+    </div>
+    <div class="achievement">
+        <h2>Guaranteed</h2>
+        <p>Improvement in Grades</p>
+    </div>
+    <div class="achievement">
+        <h2>100%</h2>
+        <p>Interactive Tutorials</p>
+    </div>
+</section>
 
-    <!-- Notes Section -->
-    <section id="notes" class="notes">
-        <h2>Notes</h2>
-        <p>Coming soon...</p>
-    </section>
+<footer>
+    &copy; 2025 Xpertz Tutorials. All rights reserved.
+</footer>
 
-    <!-- Achievements Section -->
-    <section id="achievements" class="achievements">
-        <h2>Our Achievements</h2>
-        <div class="achievement-grid">
-            <div class="achievement-card">
-                <h3>Guaranteed Improvement</h3>
-            </div>
-            <div class="achievement-card">
-                <h3>Trusted by over 250 parents</h3>
-            </div>
-            <div class="achievement-card">
-                <h3>Interactive Learning</h3>
-            </div>
-        </div>
-    </section>
+<script>
+// Dark mode toggle
+const darkToggle = document.getElementById('darkToggle');
+darkToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+});
 
-    <!-- Image Carousel -->
-    <section class="carousel-section">
-        <div class="carousel-track">
-            <img src="placeholder1.jpg" alt="Slide 1" class="carousel-slide">
-            <img src="placeholder2.jpg" alt="Slide 2" class="carousel-slide">
-            <img src="placeholder3.jpg" alt="Slide 3" class="carousel-slide">
-        </div>
-    </section>
+// Smooth scroll
+function scrollToSection(id){
+    document.getElementById(id).scrollIntoView({behavior:'smooth'});
+}
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Xpertz Tutorials. All rights reserved.</p>
-    </footer>
-
-    <script src="script.js"></script>
+// Auto-scroll tiles pause on hover
+const tilesWrapper = document.querySelector('.tiles-wrapper');
+tilesWrapper.addEventListener('mouseenter', () => {
+    document.querySelector('.tiles-inner').style.animationPlayState = 'paused';
+});
+tilesWrapper.addEventListener('mouseleave', () => {
+    document.querySelector('.tiles-inner').style.animationPlayState = 'running';
+});
+</script>
 </body>
 </html>
