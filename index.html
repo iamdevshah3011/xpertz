@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduFocus - Study Notes & Guides</title>
+    <title>Xpertz Tutorials - Study Notes & Guides</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
     <header class="header">
-        <div class="logo">EduFocus</div>
+        <div class="logo">Xpertz Tutorials</div>
         <nav class="nav">
-            <a href="index.html" class="nav-link">Home</a>
+            <a href="index.html" class="nav-link active">Home</a>
             
+            <!-- MEGA-MENU DROP-DOWN (Updated for all files) -->
             <div class="dropdown">
                 <button class="nav-link dropdown-toggle">Study Notes</button>
                 <div class="dropdown-menu">
@@ -42,29 +43,50 @@
         </nav>
     </header>
 
+    <!-- NEW: Dynamic Hero Section for visual interest and smoothness -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Unlock Clarity in Learning</h1>
+            <p>Simplified notes and guides for K-10 students from Xpertz Tutorials. Clean structure. Core focus.</p>
+            <a href="notes/class8.html" class="cta-button">Start Learning Now &rarr;</a>
+        </div>
+    </section>
+
     <main class="main-content">
-        <h1>Welcome to EduFocus: Your Learning Hub</h1>
-        <p>Start your journey today! Select your class from the "Study Notes" menu above or explore our curated subjects below.</p>
-        
+        <!-- Feature Rich Section (Minimalist Tiles) - Now much smoother -->
         <section class="feature-grid">
             <div class="feature-tile">
-                <h3>Classes 3-8</h3>
-                <p>All Core Subjects</p>
+                <div class="icon-placeholder">&hearts;</div>
+                <h3>Focused Foundation</h3>
+                <p>Comprehensive coverage for all core subjects in Classes 3 through 8.</p>
             </div>
             <div class="feature-tile">
-                <h3>Classes 9-10</h3>
-                <p>English & Social Science</p>
+                <div class="icon-placeholder">&spades;</div>
+                <h3>Secondary Focus</h3>
+                <p>Deep-dive study notes specifically tailored for Class 9 and 10 English and Social Science.</p>
             </div>
             <div class="feature-tile">
-                <h3>Minimalist Notes</h3>
-                <p>Simple, effective study guides.</p>
+                <div class="icon-placeholder">&clubs;</div>
+                <h3>Sleek & Simple</h3>
+                <p>Minimalist design ensures zero distraction, allowing maximum focus on content.</p>
             </div>
+        </section>
+
+        <section class="callout-section">
+            <h2>Ready to dive into your next subject?</h2>
+            <a href="#" class="cta-button secondary-cta">Explore All Notes</a>
         </section>
     </main>
 
     <footer class="footer">
-        <p>&copy; 2025 EduFocus. All rights reserved.</p>
+        <p>&copy; 2025 Xpertz Tutorials. All rights reserved.</p>
     </footer>
+
+    <!-- Simple JavaScript for mobile menu toggle (Interactivity feature) -->
+    <script>
+        // Simple mobile menu toggle functionality (not included in the initial HTML for simplicity)
+        // If you want a mobile menu icon, you would need to add a small JS snippet here
+    </script>
 
 </body>
 </html>
