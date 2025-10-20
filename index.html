@@ -6,586 +6,701 @@
   <title>Xpertz Tutorials — Home</title>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
     /* =========================
-       Color palette (logo-friendly)
+       Theme variables
        ========================= */
     :root{
-      --navy:#0f2834;        /* deep navy background */
-      --navy-2:#0b1f26;
-      --cream:#f3ebdf;       /* light cream for type/accents */
-      --muted:#b7c0c6;
-      --accent:#d6b76a;      /* subtle warm accent (gold-like) */
-      --glass: rgba(255,255,255,0.06);
-      --shadow: 0 8px 30px rgba(2,8,12,0.55);
-      --radius:12px;
-      --ease:cubic-bezier(.2,.9,.2,1);
+      --bg-1: #fbfaf7;      /* soft cream */
+      --bg-2: #f6f7f9;      /* near-white section bg */
+      --navy: #0f2834;      /* primary accent */
+      --muted: #64707a;     /* muted text */
+      --gold: #e6b800;      /* gold accent */
+      --glass: rgba(15,40,52,0.05);
+      --card-shadow: 0 18px 40px rgba(15,40,52,0.06);
+      --ease: cubic-bezier(.2,.9,.2,1);
+      --radius: 14px;
+      --max-width: 1500px;
     }
 
     /* =========================
-       Basic reset + utilities
+       Global reset / basics
        ========================= */
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family:'Inter',system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
-      background:linear-gradient(180deg,var(--navy) 0%, #07161a 100%);
-      color:var(--cream);
+      font-family:'Poppins', Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,var(--bg-1),#ffffff);
+      color:var(--navy);
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
       line-height:1.45;
-      -webkit-tap-highlight-color: transparent;
     }
     a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
+    img{display:block;max-width:100%}
+    button{font-family:inherit}
 
     /* =========================
-       Top nav
+       Full-width container helper
        ========================= */
-    .container{max-width:1200px;margin:0 auto;padding:0 24px}
-    header{
-      position:sticky;top:12px;z-index:40;
-      backdrop-filter: blur(6px);
-      padding:10px 0;
+    .full-bleed { width:100%; }
+    .inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 28px;
     }
-    .nav-wrap{
-      display:flex;align-items:center;justify-content:space-between;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:20px;padding:10px 18px;box-shadow:var(--shadow);
-      border:1px solid rgba(255,255,255,0.03);
-    }
-    .brand{
-      display:flex;gap:12px;align-items:center;
-    }
-    /* Inline SVG logo mark */
-    .logo{
-      width:56px;height:56px;flex-shrink:0;
-      background:linear-gradient(180deg,var(--cream), #efe6d8);
-      border-radius:12px;
-      display:grid;place-items:center;
-      box-shadow: 0 6px 18px rgba(2,8,12,0.6);
-    }
-    .logo svg{width:38px;height:38px;display:block}
-    .brand h1{margin:0;font-family:'Playfair Display',serif;font-weight:700;font-size:20px;letter-spacing:0.6px;color:var(--cream)}
-    .brand p{margin:0;font-size:11px;color:var(--muted);margin-top:2px}
 
-    .nav{
-      display:flex;gap:14px;align-items:center;
+    /* =========================
+       Header / nav
+       ========================= */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0.55));
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(15,40,52,0.04);
     }
-    .nav > .nav-item{position:relative}
+    .nav-wrap {
+      display:flex;align-items:center;justify-content:space-between;height:76px;
+      gap:18px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+    .brand {
+      display:flex;align-items:center;gap:14px;
+    }
+    .brand img {
+      width:56px;height:56px;object-fit:contain;border-radius:10px;background:transparent;
+      box-shadow: 0 10px 30px rgba(15,40,52,0.06);
+    }
+    .brand .title { font-weight:700;font-size:18px;color:var(--navy);letter-spacing:0.2px }
+    .brand .tag { font-size:12px;color:var(--muted) }
+
+    nav.primary {
+      display:flex;align-items:center;gap:10px;
+    }
+    .nav-item { position:relative }
     .nav-link{
-      padding:8px 12px;border-radius:10px;display:inline-block;font-weight:600;
-      transition:all .28s var(--ease);color:var(--cream);font-size:15px;
+      padding:10px 12px;border-radius:10px;font-weight:600;color:var(--navy);
+      transition:all .22s var(--ease);
+      background:transparent;
+      border:0;cursor:pointer;font-size:15px;
     }
     .nav-link:hover{transform:translateY(-3px);background:var(--glass)}
-    .cta{
-      background:var(--accent);color:#081018;padding:10px 14px;border-radius:12px;font-weight:700;
-      box-shadow: 0 8px 24px rgba(214,183,106,0.18);
-      transition:transform .2s var(--ease),box-shadow .2s var(--ease);
+    .cta {
+      background: linear-gradient(90deg,var(--gold), #d39f00);
+      color: #08202a;
+      padding:10px 14px;border-radius:12px;font-weight:800;margin-left:6px;
+      box-shadow:0 10px 30px rgba(230,184,0,0.12);
     }
-    .cta:hover{transform:translateY(-3px);box-shadow: 0 14px 36px rgba(214,183,106,0.22)}
-    /* Dropdown */
-    .dropdown{
+
+    /* Dropdown panel */
+    .dropdown {
       position:absolute;left:0;top:calc(100% + 12px);
-      min-width:220px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
-      border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.03);
-      box-shadow: 0 10px 30px rgba(2,8,12,0.6);opacity:0;transform:translateY(8px) scale(.98);
-      pointer-events:none;transition:opacity .22s var(--ease),transform .22s var(--ease);
-      backdrop-filter: blur(8px);
+      min-width:220px;background:var(--bg-2);
+      border-radius:12px;padding:10px;border:1px solid rgba(15,40,52,0.04);
+      box-shadow: 0 12px 40px rgba(15,40,52,0.06);
+      opacity:0;transform:translateY(6px);pointer-events:none;transition:all .22s var(--ease);
     }
-    .dropdown.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
-    .dropdown a{display:block;padding:8px 10px;border-radius:8px;color:var(--cream)}
-    .dropdown a:hover{background:rgba(255,255,255,0.03)}
+    .dropdown.show{opacity:1;transform:none;pointer-events:auto}
+    .dropdown a{display:block;padding:8px 10px;border-radius:8px;color:var(--navy);}
+    .dropdown a:hover{background:rgba(15,40,52,0.03)}
 
     /* Mobile */
-    .mobile-toggle{display:none;background:transparent;border:0;color:var(--cream)}
-    @media (max-width:880px){
-      .nav{display:none}
-      .mobile-toggle{display:inline-flex;align-items:center;gap:8px}
-      .nav-wrap{padding:12px}
+    .menu-toggle { display:none;border:0;background:transparent;cursor:pointer }
+    @media (max-width:960px){
+      .nav-wrap { padding: 0 16px; }
+      nav.primary{ display:none }
+      .menu-toggle{ display:inline-flex }
     }
 
     /* =========================
-       Hero
+       Hero - full width immersive
        ========================= */
-    .hero{
-      display:grid;grid-template-columns:1.02fr .9fr;gap:36px;align-items:center;
-      padding:64px 0 32px;
-    }
-    .hero-left{padding:28px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.02)}
-    .eyebrow{display:inline-block;background:rgba(214,183,106,0.12);color:var(--accent);padding:6px 10px;border-radius:999px;font-weight:700;font-size:13px;margin-bottom:18px}
-    .hero h2{font-family:'Playfair Display',serif;font-size:42px;margin:0 0 14px;line-height:1.02;color:var(--cream)}
-    .hero p.lead{color:var(--muted);font-size:16px;margin:0 0 22px}
-    .hero .actions{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{padding:12px 16px;border-radius:10px;font-weight:700;border:0;cursor:pointer}
-    .btn-primary{background:var(--accent);color:#081018}
-    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--cream)}
-    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
-    .feature{
-      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));
-      border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.02);font-size:14px
+    .hero-wrap {
+      width:100%;
+      padding: 68px 0 44px;
+      background: linear-gradient(180deg,#ffffff 0%, #fbfbfd 60%);
+      overflow:hidden;
+      position:relative;
     }
 
-    /* Hero right: carousel / showcase */
-    .showcase{
-      height:420px;border-radius:18px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,0.02);
-      background:linear-gradient(180deg, rgba(2,8,12,0.18), rgba(2,8,12,0.28));
-      display:flex;align-items:center;justify-content:center;
+    .hero {
+      display:flex;gap:36px;align-items:center;
+      padding: 14px 28px;
     }
-    .carousel{
-      width:100%;height:100%;position:relative;
-    }
-    .slide{
-      position:absolute;inset:0;display:grid;place-items:center;padding:24px;
-      transition:transform .8s var(--ease),opacity .6s var(--ease);
-      opacity:0;transform:translateY(18px) scale(.98);
-    }
-    .slide.show{opacity:1;transform:translateY(0) scale(1)}
-    .slide .card{
-      width:92%;height:84%;border-radius:14px;padding:22px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);
-      display:flex;flex-direction:column;gap:12px;align-items:flex-start;justify-content:center;
-    }
-    .card h3{margin:0;font-size:20px;color:var(--cream);font-weight:700}
-    .card p{margin:0;color:var(--muted)}
 
-    .dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
-    .dot{width:10px;height:10px;border-radius:10px;background:rgba(255,255,255,0.06);cursor:pointer}
-    .dot.active{background:var(--accent);box-shadow:0 8px 20px rgba(214,183,106,0.18)}
+    .hero-left { flex:1; max-width:800px }
+    .eyebrow {
+      display:inline-block;padding:8px 12px;border-radius:999px;background:linear-gradient(90deg, rgba(230,184,0,0.12), rgba(15,40,52,0.02));color:var(--gold);font-weight:700;font-size:13px;margin-bottom:14px;
+    }
+    h1.hero-title {
+      margin:0;font-size:46px;line-height:1.02;font-weight:800;color:var(--navy);
+      font-family: 'Poppins', sans-serif;
+    }
+    p.lead { margin-top:12px;font-size:17px;color:var(--muted);max-width:58ch }
+    .hero-ctas { margin-top:22px;display:flex;gap:12px;flex-wrap:wrap;align-items:center }
+
+    .btn {
+      border:0;padding:12px 16px;border-radius:12px;font-weight:700;cursor:pointer;
+    }
+    .btn-primary { background: linear-gradient(90deg,var(--gold), #d39f00); color:#032028; }
+    .btn-outline { background:transparent;border:1px solid rgba(15,40,52,0.06);color:var(--navy) }
+
+    /* Right: hero illustration / cards */
+    .hero-right { flex:1.05; min-height:360px; display:flex;align-items:center;justify-content:center;gap:18px;position:relative }
+    .hero-cards { width:100%; display:grid;grid-template-columns:repeat(3,1fr);gap:18px }
+    .hc {
+      background:linear-gradient(180deg,#ffffff, #fbfbfd);
+      border-radius:16px;padding:18px;border:1px solid rgba(15,40,52,0.04);
+      box-shadow:var(--card-shadow);transition:transform .28s var(--ease);
+    }
+    .hc:hover{transform:translateY(-8px)}
+    .hc h4{margin:0;font-size:16px;color:var(--navy)}
+    .hc p{margin:8px 0 0;color:var(--muted);font-size:13px}
+
+    /* subtle parallax shapes */
+    .hero-deco {
+      position:absolute;right:-80px;top:-60px;width:420px;height:420px;border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(230,184,0,0.10), rgba(15,40,52,0.02));
+      filter: blur(40px);pointer-events:none;transform:translateZ(0);
+    }
 
     /* =========================
-       Course grid + CTA
+       Courses / sections (full width)
        ========================= */
-    section.courses{padding:42px 0}
-    .grid{
-      display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+    section { padding:48px 0; width:100%; }
+    .section-inner { max-width:var(--max-width); margin:0 auto; padding:0 28px; }
+
+    .section-title { display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px }
+    .section-title h3{margin:0;font-size:22px;color:var(--navy);font-weight:700}
+    .cards-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:18px }
+
+    .course-card {
+      background:linear-gradient(180deg,#fff,#fbfbfd);
+      border-radius:14px;padding:18px;border:1px solid rgba(15,40,52,0.04);
+      box-shadow: 0 12px 30px rgba(15,40,52,0.04);transition:transform .28s var(--ease),box-shadow .28s var(--ease);
     }
-    .course{
-      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));
-      border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.02);
-      transition:transform .28s var(--ease),box-shadow .28s var(--ease);
-    }
-    .course:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(2,8,12,0.6)}
-    .course h4{margin:0 0 8px;font-size:18px}
-    .course p{margin:0;color:var(--muted);font-size:14px}
-    .tags{display:flex;gap:8px;margin-top:12px}
-    .tag{font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted)}
+    .course-card:hover{ transform:translateY(-10px); box-shadow: 0 28px 60px rgba(15,40,52,0.07) }
+    .course-card h4{margin:0 0 8px}
+    .course-card p{color:var(--muted);margin:0;font-size:14px}
+    .badge { display:inline-block;padding:6px 8px;border-radius:999px;background:rgba(15,40,52,0.05);font-size:12px;color:var(--muted);margin-top:12px }
 
     /* =========================
-       Footer & contact
+       Horizontal tile scroll (auto + drag + snap)
        ========================= */
-    footer{padding:36px 0;border-top:1px solid rgba(255,255,255,0.02);margin-top:36px}
-    .footer-grid{display:flex;gap:24px;align-items:flex-start}
-    .contact-card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.02);width:360px}
-    .socials{display:flex;gap:10px;margin-top:12px}
-    .socials a{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,0.02)}
-    .small{font-size:13px;color:var(--muted)}
+    .tile-strip {
+      margin-top:18px;
+      overflow:hidden;
+      position:relative;
+      padding:12px 6px;
+    }
+    .tiles {
+      display:flex;gap:12px; align-items:stretch;
+      scroll-snap-type: x mandatory;
+      overflow-x:auto;
+      padding-bottom:8px;
+      -webkit-overflow-scrolling:touch;
+      scroll-behavior:smooth;
+    }
+    .tile {
+      flex:0 0 320px; height:200px; border-radius:12px; background:linear-gradient(180deg,#ffffff,#f8f9fb);
+      border:1px solid rgba(15,40,52,0.04); box-shadow: 0 12px 30px rgba(15,40,52,0.04);
+      scroll-snap-align:center; position:relative; overflow:hidden;
+      cursor:grab; transition:transform .22s var(--ease);
+    }
+    .tile:active { cursor:grabbing }
+    .tile:hover { transform: translateY(-6px) }
+    .tile .img {
+      position:absolute;inset:0;background-size:cover;background-position:center;filter:contrast(95%) saturate(95%);
+    }
+    .tile .overlay {
+      position:absolute;inset:0;background:linear-gradient(180deg, transparent 40%, rgba(15,40,52,0.34) 100%);
+    }
+    .tile .meta {
+      position:absolute;left:14px;bottom:14px;color:#fff;z-index:3;
+      font-weight:700;text-shadow:0 8px 18px rgba(0,0,0,0.4)
+    }
+
+    /* Controls */
+    .tile-controls { display:flex;gap:8px;align-items:center;margin-left:8px }
+    .control-btn {
+      border:0;background:transparent;padding:8px;border-radius:8px;cursor:pointer;color:var(--navy);
+      box-shadow:0 6px 18px rgba(15,40,52,0.04);
+      background: #fff;
+    }
 
     /* =========================
-       Utilities & responsiveness
+       Notes / About / Contact
        ========================= */
+    .notes-grid { display:flex;gap:18px;flex-wrap:wrap }
+    .note-card { flex:1; min-width:260px; background:linear-gradient(180deg,#fff,#fbfbfd);border-radius:12px;padding:14px;border:1px solid rgba(15,40,52,0.04) }
+
+    .about-split { display:flex;gap:28px;align-items:center }
+    .about-img { flex:1; min-height:260px;border-radius:14px;background:linear-gradient(180deg,#fff,#f6f8fb);border:1px solid rgba(15,40,52,0.04) }
+    .about-text { flex:1.2 }
+
+    /* Contact form */
+    .contact-form { max-width:720px; background:linear-gradient(180deg,#fff,#fbfbfd);border-radius:12px;padding:18px;border:1px solid rgba(15,40,52,0.04) }
+    .input, textarea { width:100%;padding:12px;border-radius:10px;border:1px solid rgba(15,40,52,0.06);background:transparent;outline:none;color:var(--navy);font-size:14px }
+    textarea { resize:vertical; min-height:120px }
+
+    /* Footer */
+    footer { padding:28px 0;border-top:1px solid rgba(15,40,52,0.04);background:transparent }
+    .footer-inner { display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap }
+
+    /* Small responsiveness */
     @media (max-width:1100px){
-      .hero{grid-template-columns:1fr;gap:20px}
-      .showcase{height:360px}
-      .grid{grid-template-columns:repeat(2,1fr)}
+      .hero{flex-direction:column-reverse;gap:22px}
+      .hero-right{min-height:320px}
+      .cards-grid{ grid-template-columns: repeat(2,1fr) }
+      .tiles .tile{ flex:0 0 280px; height:180px }
     }
-    @media (max-width:640px){
-      .container{padding:0 16px}
-      .logo{width:48px;height:48px}
-      .brand h1{font-size:16px}
-      .hero h2{font-size:30px}
-      .features{grid-template-columns:repeat(2,1fr)}
-      .grid{grid-template-columns:1fr}
-      header{position:relative;top:8px}
-      .showcase{height:260px}
+    @media (max-width:720px){
+      .nav-wrap{padding:0 16px}
+      .brand .title{display:none}
+      .hc{ display:none }
+      .cards-grid{ grid-template-columns: 1fr }
+      .tiles .tile{ flex:0 0 88%; height:190px }
     }
 
-    /* small reveal animations */
-    .reveal{opacity:0;transform:translateY(12px);transition:all .9s var(--ease)}
-    .reveal.show{opacity:1;transform:none}
+    /* reveal animation */
+    .reveal { opacity:0; transform:translateY(12px); transition: all .9s var(--ease) }
+    .reveal.show { opacity:1; transform:none }
   </style>
 </head>
 <body>
+
+  <!-- HEADER -->
   <header>
-    <div class="container">
-      <div class="nav-wrap" role="navigation" aria-label="Main navigation">
-        <div class="brand" aria-hidden="false">
-          <div class="logo" aria-hidden="true">
-            <!-- Inline bespoke SVG mark combining X + lightbulb / book -->
-            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#efe6d8"/></linearGradient></defs>
-              <rect x="0" y="0" width="64" height="64" rx="12" fill="none"/>
-              <g transform="translate(6,6)">
-                <!-- bulb outline -->
-                <path d="M26 0C20 0 14 5 14 11c0 3 1 5 2.5 7.2 1.2 1.6 1.7 3.6 1.7 5.8v2.5c0 1.6 1.3 2.9 2.9 2.9h9c1.6 0 2.9-1.3 2.9-2.9V24c0-2.2.5-4.2 1.7-5.8C45 16 46 14 46 11 46 5 40 0 34 0H26z" fill="#0f2834"/>
-                <!-- X inside -->
-                <g transform="translate(4,4)" fill="url(#g)">
-                  <path d="M14 6 L18 10 L22 6 L26 10 L22 14 L26 18 L22 22 L18 18 L14 22 L10 18 L14 14 L10 10 Z"/>
-                </g>
-              </g>
-            </svg>
-          </div>
-          <div>
-            <h1>Xpertz Tutorials</h1>
-            <p>Learn. Master. Excel.</p>
+    <div class="nav-wrap">
+      <div class="brand" aria-hidden="false">
+        <img src="xpertz-logo.png" alt="Xpertz Tutorials logo" onerror="this.style.display='none'">
+        <div>
+          <div class="title">Xpertz Tutorials</div>
+          <div class="tag">Learn • Master • Excel</div>
+        </div>
+      </div>
+
+      <nav class="primary" aria-label="Main navigation">
+        <div class="nav-item">
+          <button class="nav-link" data-dd="courses" aria-expanded="false">Courses ▾</button>
+          <div class="dropdown" id="dd-courses" role="menu" aria-hidden="true">
+            <a href="#courses">All Courses</a>
+            <a href="#courses">STEM Foundations</a>
+            <a href="#courses">English & Humanities</a>
+            <a href="#courses">Competitive Prep</a>
           </div>
         </div>
 
-        <nav class="nav" aria-label="Primary">
-          <div class="nav-item">
-            <button class="nav-link" data-dd="courses" aria-expanded="false">Courses ▾</button>
-            <div class="dropdown" id="dd-courses" role="menu" aria-hidden="true">
-              <a href="#courses" role="menuitem">All Courses</a>
-              <a href="#courses" role="menuitem">STEM Foundations</a>
-              <a href="#courses" role="menuitem">English & Humanities</a>
-              <a href="#courses" role="menuitem">Competitive Prep</a>
-            </div>
+        <div class="nav-item">
+          <button class="nav-link" data-dd="notes" aria-expanded="false">Notes ▾</button>
+          <div class="dropdown" id="dd-notes" role="menu" aria-hidden="true">
+            <a href="#notes">Class Notes</a>
+            <a href="#notes">Revision Sheets</a>
+            <a href="#notes">Download Center</a>
           </div>
+        </div>
 
-          <div class="nav-item">
-            <button class="nav-link" data-dd="notes" aria-expanded="false">Notes ▾</button>
-            <div class="dropdown" id="dd-notes" role="menu" aria-hidden="true">
-              <a href="#notes" role="menuitem">Class Notes</a>
-              <a href="#notes" role="menuitem">Revision Sheets</a>
-              <a href="#notes" role="menuitem">Download Center</a>
-            </div>
+        <div class="nav-item"><button class="nav-link" data-dd="class38" aria-expanded="false">Class 3–8 ▾</button>
+          <div class="dropdown" id="dd-class38" role="menu" aria-hidden="true">
+            <a href="#class38">Primary Math</a>
+            <a href="#class38">Science Explorers</a>
+            <a href="#class38">English Basics</a>
           </div>
+        </div>
 
-          <div class="nav-item">
-            <button class="nav-link" data-dd="class38" aria-expanded="false">Class 3–8 ▾</button>
-            <div class="dropdown" id="dd-class38" role="menu" aria-hidden="true">
-              <a href="#class38" role="menuitem">Primary Math</a>
-              <a href="#class38" role="menuitem">Science Explorers</a>
-              <a href="#class38" role="menuitem">English Basics</a>
-            </div>
+        <div class="nav-item"><button class="nav-link" data-dd="class910" aria-expanded="false">Class 9–10 ▾</button>
+          <div class="dropdown" id="dd-class910" role="menu" aria-hidden="true">
+            <a href="#class910">Mathematics</a>
+            <a href="#class910">Physics & Chemistry</a>
+            <a href="#class910">Languages</a>
           </div>
+        </div>
 
-          <div class="nav-item">
-            <button class="nav-link" data-dd="class910" aria-expanded="false">Class 9–10 ▾</button>
-            <div class="dropdown" id="dd-class910" role="menu" aria-hidden="true">
-              <a href="#class910" role="menuitem">Mathematics</a>
-              <a href="#class910" role="menuitem">Physics & Chemistry</a>
-              <a href="#class910" role="menuitem">Languages</a>
-            </div>
-          </div>
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#contact">Contact</a>
 
-          <a class="nav-link" href="#about">About</a>
-          <a class="nav-link" href="#contact">Contact</a>
+        <a class="cta" href="#enroll">Enroll</a>
+      </nav>
 
-          <a class="cta nav-link" href="#enroll">Enroll</a>
-        </nav>
-
-        <button class="mobile-toggle" aria-label="Open menu" id="mobileBtn">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </button>
-      </div>
+      <button class="menu-toggle" aria-label="Open menu" id="mobileOpen">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="#0f2834" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
     </div>
   </header>
 
-  <main class="container" id="top">
-    <!-- HERO -->
-    <section class="hero" aria-label="Intro">
-      <div class="hero-left reveal">
-        <span class="eyebrow">New — curated learning paths</span>
-        <h2>Master concepts. Build confidence. Stand out.</h2>
-        <p class="lead">Xpertz Tutorials combines proven teaching patterns with focused practice. Designed for classes 3–10 with expert instructors and crisp notes that actually stick.</p>
+  <!-- HERO -->
+  <div class="hero-wrap full-bleed">
+    <div class="inner hero" role="region" aria-label="Intro">
+      <div class="hero-left">
+        <div class="eyebrow">New — curated learning paths</div>
+        <h1 class="hero-title">Build deep understanding. <br> Score higher with confident study.</h1>
+        <p class="lead">Xpertz Tutorials offers focused, bite-sized lessons, clear revision notes, and practice-driven assessments for students in classes 3–10. Learn from expert instructors and level up — step by step.</p>
 
-        <div class="actions">
-          <button class="btn btn-primary" onclick="location.href='#courses'">Browse Courses</button>
-          <button class="btn btn-ghost" onclick="location.href='#notes'">Get Notes</button>
-          <button class="btn" style="background:transparent;color:var(--muted);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);">Watch Intro</button>
+        <div class="hero-ctas">
+          <button class="btn btn-primary" onclick="location.href='#courses'">Explore Courses</button>
+          <button class="btn btn-outline" onclick="location.href='#notes'">Get Notes</button>
+          <button class="btn" onclick="openJoin()" style="background:transparent;border:1px solid rgba(15,40,52,0.06);">Watch Intro</button>
         </div>
 
-        <div class="features" style="margin-top:20px">
-          <div class="feature">
-            <strong>Expert Tutors</strong>
-            <div class="small">Experienced teachers + pedagogical design.</div>
-          </div>
-          <div class="feature">
-            <strong>Short lessons</strong>
-            <div class="small">Bite-sized videos & notes for everyday progress.</div>
-          </div>
-          <div class="feature">
-            <strong>Practice-driven</strong>
-            <div class="small">Worked examples, quizzes and downloadable notes.</div>
-          </div>
+        <div style="display:flex;gap:10px;margin-top:18px">
+          <div class="small" style="color:var(--muted)">Trusted by learners across India</div>
         </div>
       </div>
 
-      <div class="showcase reveal" aria-hidden="false">
-        <div class="carousel" id="carousel">
-          <div class="slide show" data-index="0">
-            <div class="card">
-              <h3>Interactive Lessons</h3>
-              <p>Short, focused modules with checkpoints that build mastery quickly.</p>
-            </div>
+      <div class="hero-right" aria-hidden="false">
+        <div class="hero-cards" aria-hidden="true">
+          <div class="hc">
+            <h4>Interactive Lessons</h4>
+            <p>Short modules with checkpoints and examples.</p>
           </div>
-          <div class="slide" data-index="1">
-            <div class="card">
-              <h3>Clear Notes</h3>
-              <p>High-quality revision notes, condensed for fast review and recall.</p>
-            </div>
+          <div class="hc">
+            <h4>Concise Notes</h4>
+            <p>High-quality revision sheets for quick recall.</p>
           </div>
-          <div class="slide" data-index="2">
-            <div class="card">
-              <h3>Regular Tests</h3>
-              <p>Periodic assessments and instant feedback to track progress.</p>
-            </div>
+          <div class="hc">
+            <h4>Practice Tests</h4>
+            <p>Periodic assessments with instant feedback.</p>
           </div>
         </div>
 
-        <div class="dots" id="dots">
-          <div class="dot active" data-target="0"></div>
-          <div class="dot" data-target="1"></div>
-          <div class="dot" data-target="2"></div>
-        </div>
+        <div class="hero-deco" aria-hidden="true"></div>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <!-- Courses preview -->
-    <section id="courses" class="courses reveal" aria-label="Courses">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+  <!-- COURSES -->
+  <section id="courses" class="full-bleed">
+    <div class="section-inner inner reveal">
+      <div class="section-title">
         <div>
-          <h3 style="margin:0;font-family:'Playfair Display',serif;">Featured Courses</h3>
-          <div class="small" style="margin-top:6px;color:var(--muted)">Programs for every learner — from basics to competitive prep.</div>
+          <h3>Popular Courses</h3>
+          <div style="color:var(--muted);margin-top:6px">Structured paths for every grade and goal.</div>
         </div>
         <div>
-          <a class="btn btn-ghost" href="#courses">View Catalog</a>
+          <a class="btn btn-outline" href="#courses">View all</a>
         </div>
       </div>
 
-      <div class="grid">
-        <article class="course">
+      <div class="cards-grid">
+        <div class="course-card reveal">
           <h4>Foundations — Mathematics (Class 3–5)</h4>
-          <p>Playful approach to fundamentals: arithmetic, shapes, and problem-solving.</p>
-          <div class="tags">
-            <span class="tag">Class 3–5</span><span class="tag">Interactive</span><span class="tag">Short lessons</span>
-          </div>
-        </article>
+          <p>Friendly foundations, visual learning and practice.</p>
+          <div class="badge">Class 3–5 • Interactive</div>
+        </div>
 
-        <article class="course">
+        <div class="course-card reveal">
           <h4>Science Explorers (Class 6–8)</h4>
-          <p>Concept-first lessons with experiments, diagrams, and clear notes.</p>
-          <div class="tags">
-            <span class="tag">Class 6–8</span><span class="tag">Hands-on</span><span class="tag">Notes</span>
-          </div>
-        </article>
+          <p>Experiments, diagrams, and clear explanatory notes.</p>
+          <div class="badge">Class 6–8 • Hands-on</div>
+        </div>
 
-        <article class="course">
+        <div class="course-card reveal">
           <h4>Mathematics Mastery (Class 9–10)</h4>
-          <p>Problem strategies, exam-style practice and concise formula sheets.</p>
-          <div class="tags">
-            <span class="tag">Class 9–10</span><span class="tag">Exam prep</span>
-          </div>
-        </article>
+          <p>Exam-focused strategies, problems & formula sheets.</p>
+          <div class="badge">Class 9–10 • Exam prep</div>
+        </div>
       </div>
-    </section>
 
-    <!-- Notes preview -->
-    <section id="notes" class="reveal" style="margin-top:30px">
-      <div style="display:flex;gap:18px;align-items:center;justify-content:space-between">
-        <div style="max-width:68%">
-          <h3 style="margin:0;font-family:'Playfair Display',serif">Notes & Revision Sheets</h3>
-          <p class="small" style="margin-top:8px;color:var(--muted)">Download crisp, printable revision sheets made for quick review before tests and exams.</p>
+      <!-- Horizontal tile strip -->
+      <div style="margin-top:28px">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div style="font-weight:700;font-size:18px">Highlights</div>
+          <div class="tile-controls">
+            <button class="control-btn" id="tilePrev" aria-label="previous">◀</button>
+            <button class="control-btn" id="tileNext" aria-label="next">▶</button>
+          </div>
+        </div>
+
+        <div class="tile-strip">
+          <div class="tiles" id="tiles">
+            <!-- Placeholder tiles (replace backgrounds with real images later) -->
+            <div class="tile" tabindex="0">
+              <div class="img" style="background-image:linear-gradient(180deg, rgba(230,184,0,0.12), rgba(15,40,52,0.08)), url('https://images.unsplash.com/photo-1584697964154-2a0f9b1f9d8b?auto=format&fit=crop&w=1200&q=60');"></div>
+              <div class="overlay"></div>
+              <div class="meta">Interactive Quizzes</div>
+            </div>
+
+            <div class="tile" tabindex="0">
+              <div class="img" style="background-image:linear-gradient(180deg, rgba(15,40,52,0.06), rgba(15,40,52,0.12)), url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=60');"></div>
+              <div class="overlay"></div>
+              <div class="meta">Live Doubt Solving</div>
+            </div>
+
+            <div class="tile" tabindex="0">
+              <div class="img" style="background-image:linear-gradient(180deg, rgba(230,184,0,0.06), rgba(15,40,52,0.08)), url('https://images.unsplash.com/photo-1523580846011-d3a5bc25702f?auto=format&fit=crop&w=1200&q=60');"></div>
+              <div class="overlay"></div>
+              <div class="meta">Compact Notes</div>
+            </div>
+
+            <div class="tile" tabindex="0">
+              <div class="img" style="background-image:linear-gradient(180deg, rgba(15,40,52,0.06), rgba(15,40,52,0.12)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=60');"></div>
+              <div class="overlay"></div>
+              <div class="meta">Progress Tracking</div>
+            </div>
+
+            <div class="tile" tabindex="0">
+              <div class="img" style="background-image:linear-gradient(180deg, rgba(230,184,0,0.06), rgba(15,40,52,0.08)), url('https://images.unsplash.com/photo-1521747116042-5a810fda9664?auto=format&fit=crop&w=1200&q=60');"></div>
+              <div class="overlay"></div>
+              <div class="meta">Mentor Feedback</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTES -->
+  <section id="notes" class="full-bleed" style="background:linear-gradient(180deg,#ffffff,#fbfbfd);">
+    <div class="section-inner inner reveal">
+      <div class="section-title">
+        <div>
+          <h3>Notes & Revision</h3>
+          <div style="color:var(--muted);margin-top:6px">Download crisp summary notes and formula sheets.</div>
         </div>
         <div>
-          <a class="btn btn-primary" href="#notes">Download Sample</a>
+          <a class="btn btn-primary" href="#notes">Download sample</a>
         </div>
       </div>
-    </section>
 
-    <!-- About -->
-    <section id="about" class="reveal" style="margin-top:34px;padding-bottom:8px">
-      <div style="display:flex;gap:18px;align-items:flex-start">
-        <div style="flex:1">
-          <h3 style="font-family:'Playfair Display',serif;margin-top:0">About Xpertz Tutorials</h3>
-          <p class="small" style="color:var(--muted)">Xpertz Tutorials exists to make learning effective and efficient: short lessons, expert-led modules, and a focus on durable understanding. We design materials for busy students and supportive parents alike.</p>
+      <div class="notes-grid">
+        <div class="note-card reveal">
+          <strong>Revision Sheet — Math</strong>
+          <p style="color:var(--muted);margin-top:8px">One-page formulas and solved examples for quick review.</p>
+        </div>
+        <div class="note-card reveal">
+          <strong>Concept Map — Science</strong>
+          <p style="color:var(--muted);margin-top:8px">Flowcharts and diagrams for faster recall.</p>
+        </div>
+        <div class="note-card reveal">
+          <strong>Exam Practice Set</strong>
+          <p style="color:var(--muted);margin-top:8px">Timed tests with model solutions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="full-bleed">
+    <div class="section-inner inner reveal">
+      <div class="about-split">
+        <div class="about-text">
+          <h3>About Xpertz Tutorials</h3>
+          <p style="color:var(--muted);margin-top:10px">Xpertz Tutorials was founded to make high-quality learning accessible and effective. We combine curriculum-aligned lessons, crisp notes, and practice tools so learners can build mastery gradually and confidently.</p>
           <ul style="color:var(--muted);margin-top:12px">
             <li>Structured learning paths</li>
-            <li>Quality notes & assessments</li>
-            <li>Friendly pricing and trial lessons</li>
+            <li>Short lessons for busy students</li>
+            <li>Hands-on practice & instant feedback</li>
           </ul>
         </div>
 
-        <aside style="width:320px">
-          <div style="background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)">
-            <h4 style="margin:0">Our Promise</h4>
-            <p class="small" style="color:var(--muted);margin-top:8px">Clear goals, measurable progress, and a supportive learning environment for every child.</p>
-            <a class="btn btn-ghost" href="#contact" style="margin-top:12px;display:inline-block">Contact us</a>
-          </div>
-        </aside>
+        <div class="about-img" aria-hidden="true" style="background-image: linear-gradient(180deg, rgba(230,184,0,0.06), rgba(15,40,52,0.02));"></div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Contact -->
-    <section id="contact" class="reveal" style="margin-top:36px;">
-      <div style="display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap">
-        <div style="flex:1;min-width:300px">
-          <h3 style="font-family:'Playfair Display',serif;margin-top:0">Get in touch</h3>
-          <p class="small" style="color:var(--muted)">Have a question or want a demo class? Send us a message — we reply within 24 hours on weekdays.</p>
+  <!-- CONTACT -->
+  <section id="contact" class="full-bleed" style="background:var(--bg-1);">
+    <div class="section-inner inner reveal">
+      <div style="display:flex;align-items:flex-start;gap:28px;flex-wrap:wrap">
+        <div style="flex:1;min-width:320px">
+          <h3>Get in touch</h3>
+          <p style="color:var(--muted);margin-top:8px">Have questions or want a demo class? Drop us a message and we'll respond within one business day.</p>
 
-          <form id="contactForm" style="margin-top:14px;display:flex;flex-direction:column;gap:10px">
-            <input name="name" required placeholder="Full name" style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--cream);outline:none" />
-            <input name="email" required placeholder="Email address" style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--cream);outline:none" />
-            <textarea name="message" required rows="4" placeholder="How can we help?" style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--cream);outline:none"></textarea>
-            <div style="display:flex;gap:10px">
+          <form id="contactForm" class="contact-form" style="margin-top:14px">
+            <input class="input" name="name" placeholder="Full name" required />
+            <input class="input" name="email" placeholder="Email address" required style="margin-top:8px"/>
+            <textarea name="message" placeholder="How can we help?" required style="margin-top:8px"></textarea>
+            <div style="display:flex;gap:8px;margin-top:10px">
               <button class="btn btn-primary" type="submit">Send message</button>
-              <button class="btn btn-ghost" type="button" onclick="location.href='#enroll'">Enroll</button>
+              <button class="btn btn-outline" type="button" onclick="location.href='#enroll'">Enroll</button>
             </div>
-            <div id="formMsg" class="small" style="color:var(--muted);margin-top:6px"></div>
+            <div id="formMsg" style="margin-top:8px;color:var(--muted)"></div>
           </form>
         </div>
 
-        <div style="width:320px">
-          <div class="contact-card">
+        <aside style="width:320px">
+          <div style="background:linear-gradient(180deg,#fff,#fbfbfd);border-radius:12px;padding:16px;border:1px solid rgba(15,40,52,0.04)">
             <strong>Contact</strong>
-            <div class="small" style="margin-top:8px;color:var(--muted)">Email: hello@xpertztutorials.com</div>
-            <div class="small">Phone: +91 98765 43210</div>
-            <div style="margin-top:12px">
-              <strong>Office</strong>
-              <div class="small" style="color:var(--muted)">Mumbai, India</div>
-            </div>
-
-            <div class="socials" aria-hidden="true">
-              <a href="#" title="Twitter" aria-label="Twitter">T</a>
-              <a href="#" title="Instagram" aria-label="Instagram">I</a>
-              <a href="#" title="YouTube" aria-label="YouTube">Y</a>
-            </div>
+            <div style="color:var(--muted);margin-top:8px">Email: hello@xpertztutorials.com</div>
+            <div style="color:var(--muted);margin-top:2px">Phone: +91 98765 43210</div>
+            <div style="color:var(--muted);margin-top:10px"><strong>Office</strong><div style="margin-top:6px;color:var(--muted)">Mumbai, India</div></div>
           </div>
-        </div>
+        </aside>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <footer class="reveal" style="margin-top:34px">
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
-        <div class="small">© <strong>Xpertz Tutorials</strong> — 2025. All rights reserved.</div>
-        <div class="small">Privacy · Terms · Sitemap</div>
-      </div>
-    </footer>
-  </main>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner inner">
+      <div style="color:var(--muted)">© <strong>Xpertz Tutorials</strong> — 2025</div>
+      <div style="color:var(--muted)">Privacy · Terms · Sitemap</div>
+    </div>
+  </footer>
 
   <!-- Mobile menu panel -->
-  <div id="mobileMenu" style="display:none;position:fixed;inset:0;background:linear-gradient(180deg, rgba(2,6,10,0.7), rgba(2,6,10,0.85));z-index:60;padding:26px;overflow:auto">
+  <div id="mobileMenu" style="display:none;position:fixed;inset:0;background:rgba(15,40,52,0.8);z-index:120;padding:26px;overflow:auto;color:#fff">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
       <div style="display:flex;gap:12px;align-items:center">
-        <div style="width:44px;height:44px;border-radius:10px;background:var(--cream)"></div>
-        <div>
-          <div style="font-weight:800">Xpertz Tutorials</div>
-          <div style="font-size:12px;color:var(--muted)">Learn. Master. Excel.</div>
-        </div>
+        <img src="xpertz-logo.png" alt="" style="width:44px;height:44px;object-fit:contain;border-radius:8px">
+        <div style="font-weight:800">Xpertz Tutorials</div>
       </div>
-      <button class="mobile-toggle" id="mobileClose" aria-label="Close menu">&times;</button>
+      <button id="mobileClose" style="background:transparent;border:0;color:#fff;font-size:28px;cursor:pointer">&times;</button>
     </div>
 
     <nav style="display:flex;flex-direction:column;gap:12px">
-      <a class="nav-link" href="#courses" onclick="toggleMobile()">Courses</a>
-      <a class="nav-link" href="#notes" onclick="toggleMobile()">Notes</a>
-      <a class="nav-link" href="#class38" onclick="toggleMobile()">Class 3–8</a>
-      <a class="nav-link" href="#class910" onclick="toggleMobile()">Class 9–10</a>
-      <a class="nav-link" href="#about" onclick="toggleMobile()">About</a>
-      <a class="nav-link" href="#contact" onclick="toggleMobile()">Contact</a>
-      <a class="nav-link cta" href="#enroll" onclick="toggleMobile()">Enroll</a>
+      <a href="#courses" onclick="closeMobile()">Courses</a>
+      <a href="#notes" onclick="closeMobile()">Notes</a>
+      <a href="#class38" onclick="closeMobile()">Class 3–8</a>
+      <a href="#class910" onclick="closeMobile()">Class 9–10</a>
+      <a href="#about" onclick="closeMobile()">About</a>
+      <a href="#contact" onclick="closeMobile()">Contact</a>
+      <a href="#enroll" class="cta" style="display:inline-block;margin-top:8px" onclick="closeMobile()">Enroll</a>
     </nav>
   </div>
 
   <script>
-    /* ====== Dropdowns ====== */
-    const ddButtons = document.querySelectorAll('[data-dd]');
-    ddButtons.forEach(btn=>{
+    /* ---------------------------
+       Dropdown interactions
+       --------------------------- */
+    document.querySelectorAll('[data-dd]').forEach(btn=>{
       const key = btn.dataset.dd;
       const panel = document.getElementById('dd-' + key);
       btn.addEventListener('click', (e)=>{
-        const showing = panel.classList.contains('show');
-        // hide any other open
-        document.querySelectorAll('.dropdown').forEach(d=>{d.classList.remove('show');d.setAttribute('aria-hidden','true')});
-        ddButtons.forEach(b=>b.setAttribute('aria-expanded','false'));
-        if(!showing){
-          panel.classList.add('show');
-          panel.setAttribute('aria-hidden','false');
-          btn.setAttribute('aria-expanded','true');
-        } else {
-          panel.classList.remove('show');
-          panel.setAttribute('aria-hidden','true');
-          btn.setAttribute('aria-expanded','false');
-        }
+        const open = panel.classList.contains('show');
+        document.querySelectorAll('.dropdown').forEach(d=>d.classList.remove('show'));
+        document.querySelectorAll('[data-dd]').forEach(b=>b.setAttribute('aria-expanded','false'));
+        if(!open){ panel.classList.add('show'); btn.setAttribute('aria-expanded','true'); panel.setAttribute('aria-hidden','false') }
       });
     });
-    // close on outside click
     document.addEventListener('click', (e)=>{
       if(!e.target.closest('.nav-item')) {
-        document.querySelectorAll('.dropdown').forEach(d=>{d.classList.remove('show');d.setAttribute('aria-hidden','true')});
-        ddButtons.forEach(b=>b.setAttribute('aria-expanded','false'));
+        document.querySelectorAll('.dropdown').forEach(d=>d.classList.remove('show'));
+        document.querySelectorAll('[data-dd]').forEach(b=>b.setAttribute('aria-expanded','false'));
       }
     });
 
-    /* ====== Simple carousel ====== */
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-    let idx = 0;
-    function showSlide(i){
-      slides.forEach(s=>s.classList.remove('show'));
-      dots.forEach(d=>d.classList.remove('active'));
-      slides[i].classList.add('show');
-      dots[i].classList.add('active');
-    }
-    dots.forEach(d=>{
-      d.addEventListener('click', ()=>{ idx = Number(d.dataset.target); showSlide(idx); });
-    });
-    setInterval(()=>{
-      idx = (idx + 1) % slides.length;
-      showSlide(idx);
-    }, 5000);
+    /* ---------------------------
+       Reveal on scroll
+       --------------------------- */
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting) entry.target.classList.add('show');
+      });
+    }, {threshold: 0.12});
+    reveals.forEach(r=>obs.observe(r));
 
-    /* ====== Mobile menu ====== */
-    const mobileBtn = document.getElementById('mobileBtn');
+    /* ---------------------------
+       Tiles: drag-to-scroll + autoplay + controls
+       --------------------------- */
+    const tiles = document.getElementById('tiles');
+    let isDown = false, startX, scrollLeft;
+    if(tiles){
+      tiles.addEventListener('mousedown', (e)=>{
+        isDown = true; tiles.classList.add('active'); startX = e.pageX - tiles.offsetLeft; scrollLeft = tiles.scrollLeft;
+      });
+      tiles.addEventListener('mouseleave', ()=>{ isDown=false; tiles.classList.remove('active') });
+      tiles.addEventListener('mouseup', ()=>{ isDown=false; tiles.classList.remove('active') });
+      tiles.addEventListener('mousemove', (e)=>{
+        if(!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - tiles.offsetLeft;
+        const walk = (x - startX) * 1.2;
+        tiles.scrollLeft = scrollLeft - walk;
+      });
+
+      // touch drag
+      let touchStartX = 0, touchStartScroll = 0;
+      tiles.addEventListener('touchstart', (e)=>{
+        touchStartX = e.touches[0].pageX; touchStartScroll = tiles.scrollLeft;
+      }, {passive:true});
+      tiles.addEventListener('touchmove', (e)=>{
+        const x = e.touches[0].pageX; const walk = (x - touchStartX) * 1.2;
+        tiles.scrollLeft = touchStartScroll - walk;
+      }, {passive:true});
+    }
+
+    // autoplay: gentle auto-scroll loop
+    let tileAuto;
+    function startTileAuto(){
+      if(!tiles) return;
+      tileAuto = setInterval(()=>{
+        // scroll by one tile width (approx)
+        const w = tiles.querySelector('.tile')?.offsetWidth || 320;
+        if(tiles.scrollLeft + tiles.clientWidth >= tiles.scrollWidth - 10) {
+          tiles.scrollTo({left:0, behavior:'smooth'});
+        } else {
+          tiles.scrollBy({left: w + 12, behavior:'smooth'});
+        }
+      }, 3800);
+    }
+    function stopTileAuto(){
+      clearInterval(tileAuto);
+    }
+    tiles?.addEventListener('mouseenter', stopTileAuto);
+    tiles?.addEventListener('mouseleave', startTileAuto);
+    startTileAuto();
+
+    // manual controls
+    document.getElementById('tileNext').addEventListener('click', ()=>{
+      const w = tiles.querySelector('.tile')?.offsetWidth || 320;
+      tiles.scrollBy({left: w + 12, behavior:'smooth'});
+    });
+    document.getElementById('tilePrev').addEventListener('click', ()=>{
+      const w = tiles.querySelector('.tile')?.offsetWidth || 320;
+      tiles.scrollBy({left: -(w + 12), behavior:'smooth'});
+    });
+
+    /* ---------------------------
+       Mobile menu open/close
+       --------------------------- */
+    const mobileOpen = document.getElementById('mobileOpen');
     const mobileMenu = document.getElementById('mobileMenu');
     const mobileClose = document.getElementById('mobileClose');
-    function toggleMobile(open = true){
-      if(open){
-        mobileMenu.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-      } else {
-        mobileMenu.style.display = 'none';
-        document.body.style.overflow = '';
-      }
-    }
-    mobileBtn.addEventListener('click', ()=>toggleMobile(true));
-    mobileClose.addEventListener('click', ()=>toggleMobile(false));
+    function closeMobile(){ mobileMenu.style.display='none'; document.body.style.overflow=''; }
+    mobileOpen.addEventListener('click', ()=>{
+      mobileMenu.style.display='block'; document.body.style.overflow='hidden';
+    });
+    mobileClose.addEventListener('click', closeMobile);
 
-    /* ====== Form (demo only) ====== */
-    const contactForm = document.getElementById('contactForm');
-    const formMsg = document.getElementById('formMsg');
-    contactForm.addEventListener('submit', (e)=>{
+    /* ---------------------------
+       Simple contact form demo
+       --------------------------- */
+    const contactForm = document.getElementById('contactForm'), formMsg = document.getElementById('formMsg');
+    contactForm?.addEventListener('submit', (e)=>{
       e.preventDefault();
       formMsg.textContent = 'Sending...';
-      // demo fake send
       setTimeout(()=>{
-        formMsg.style.color = 'var(--accent)';
-        formMsg.textContent = 'Thanks! We received your message. We will get back soon.';
+        formMsg.style.color = 'var(--gold)';
+        formMsg.textContent = 'Thanks — your message has been received!';
         contactForm.reset();
       }, 900);
     });
 
-    /* ====== reveal on scroll ====== */
-    const observer = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          entry.target.classList.add('show');
-        }
-      });
-    }, {threshold:0.12});
-    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+    /* ---------------------------
+       Small helper: open join modal (demo)
+       --------------------------- */
+    function openJoin(){
+      alert('Thanks for your interest — integrate your video or modal here later.');
+    }
 
-    /* ====== small a11y note: close dropdown with Esc ====== */
+    /* ---------------------------
+       Accessibility: close dropdowns on Esc
+       --------------------------- */
     document.addEventListener('keydown', (e)=>{
       if(e.key === 'Escape'){
-        document.querySelectorAll('.dropdown').forEach(d=>{d.classList.remove('show')});
-        toggleMobile(false);
+        document.querySelectorAll('.dropdown').forEach(d=>d.classList.remove('show'));
+        closeMobile();
       }
     });
   </script>
 </body>
 </html>
-
