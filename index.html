@@ -1,585 +1,823 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Xpertz Tutorials — Home</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Xpertz Tutorials — Home</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <style>
-    /* ---------- Variables ---------- */
-    :root{
-      --bg: #fbfaf7;
-      --bg-2: #ffffff;
-      --muted: #6b7378;
-      --text: #0f2834;
-      --accent: #c89b00;     /* gold-ish accent */
-      --accent-2: #d39f00;
-      --glass: rgba(15,40,52,0.05);
-      --card-shadow: 0 18px 40px rgba(15,40,52,0.06);
-      --soft-shadow: 0 8px 30px rgba(15,40,52,0.06);
-      --radius: 14px;
-      --max-width: 1300px;
-      --ease: cubic-bezier(.2,.9,.2,1);
-      --bleed-padding: 28px; /* horizontal inner padding for wide screens */
+  <style>
+    /* =========================
+       Theme variables
+       ========================= */
+    :root{
+      --bg-1: #fbfaf7;      /* soft cream */
+      --bg-2: #f6f7f9;      /* near-white section bg */
+      --navy: #0f2834;      /* primary accent */
+      --muted: #64707a;     /* muted text */
+      --gold: #e6b800;      /* gold accent */
+      --gold-dark: #d39f00; /* dark gold */
+      --glass: rgba(15,40,52,0.05);
+      --card-shadow: 0 18px 40px rgba(15,40,52,0.06);
+      --ease: cubic-bezier(.2,.9,.2,1);
+      --radius: 14px;
+      --max-width: 1500px;
+    }
+
+    /* =========================
+       New Animations
+       ========================= */
+    @keyframes cta-pulse {
+        0% { box-shadow: 0 10px 30px rgba(230,184,0,0.12); }
+        50% { box-shadow: 0 10px 40px rgba(230,184,0,0.25); }
+        100% { box-shadow: 0 10px 30px rgba(230,184,0,0.12); }
     }
-
-    /* Dark mode variables */
-    :root[data-theme="dark"]{
-      --bg: #0b0f12;
-      --bg-2: #071018;
-      --muted: #9aa6ad;
-      --text: #e8f0f2;
-      --accent: #e6b800;
-      --accent-2: #ffd166;
-      --glass: rgba(255,255,255,0.03);
-      --card-shadow: 0 18px 40px rgba(0,0,0,0.6);
-      --soft-shadow: 0 8px 30px rgba(0,0,0,0.5);
-    }
-
-    /* ---------- Reset & base ---------- */
-    * { box-sizing: border-box; }
-    html,body { height:100%; }
-    body{
-      margin:0;
-      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg, var(--bg), var(--bg-2));
-      color: var(--text);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.45;
-      transition: background .45s var(--ease), color .35s var(--ease);
-    }
-    a { color: inherit; text-decoration: none; }
-    img { display:block; max-width:100%; height:auto; }
-    button { font-family: inherit; }
-
-    /* ---------- Layout helpers (bleed + inner) ---------- */
-    .full-bleed { width:100%; }
-    .inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 var(--bleed-padding);
+    @keyframes subtle-move {
+        0% { transform: translate(0, 0) scale(1); }
+        50% { transform: translate(15px, 10px) scale(1.05); }
+        100% { transform: translate(0, 0) scale(1); }
     }
 
-    /* When we want full edge content (hero) */
-    .edge {
-      width:100vw;
-      margin-left: calc(-50vw + 50%);
-      padding-left: 24px;
-      padding-right: 24px;
+
+    /* =========================
+       Global reset / basics
+       ========================= */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Poppins', Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,var(--bg-1),#ffffff);
+      color:var(--navy);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+    a{color:inherit;text-decoration:none; transition: color .3s ease, background-color .3s ease} /* Added transition */
+    img{display:block;max-width:100%}
+    button{font-family:inherit}
+
+    /* =========================
+       Full-width container helper
+       ========================= */
+    .full-bleed { width:100%; }
+    .inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* =========================
+       Header / nav
+       ========================= */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0.55));
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(15,40,52,0.04);
+      transition: box-shadow .3s var(--ease); /* Added transition for smooth hover */
+    }
+    header:hover {
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* Interactive shadow on hover */
+    }
+    .nav-wrap {
+      display:flex;align-items:center;justify-content:space-between;height:76px;
+      gap:18px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+    .brand {
+      display:flex;align-items:center;gap:14px;
+    }
+    .brand img {
+      width:56px;height:56px;object-fit:contain;border-radius:10px;background:transparent;
+      box-shadow: 0 10px 30px rgba(15,40,52,0.06);
+    }
+    .brand .title { font-weight:700;font-size:18px;color:var(--navy);letter-spacing:0.2px }
+    .brand .tag { font-size:12px;color:var(--muted) }
+
+    nav.primary {
+      display:flex;align-items:center;gap:10px;
+    }
+    .nav-item { position:relative }
+    .nav-link{
+      padding:10px 12px;border-radius:10px;font-weight:600;color:var(--navy);
+      transition:all .35s var(--ease); /* Smoother transition */
+      background:transparent;
+      border:0;cursor:pointer;font-size:15px;
+    }
+    .nav-link:hover{transform:translateY(-3px);background:var(--glass)}
+    .cta {
+      background: linear-gradient(90deg,var(--gold), var(--gold-dark)); /* Used new variable */
+      color: #08202a;
+      padding:10px 14px;border-radius:12px;font-weight:800;margin-left:6px;
+      box-shadow:0 10px 30px rgba(230,184,0,0.12);
+      transition:all .3s var(--ease); /* Added transition */
+    }
+    .cta:hover {
+        transform: translateY(-2px); /* Lift on hover */
+        box-shadow: 0 15px 40px rgba(230,184,0,0.25); /* Deeper interactive shadow */
     }
 
-    /* ---------- Header ---------- */
-    header {
-      position: sticky;
-      top:0;
-      z-index:60;
-      backdrop-filter: blur(6px);
-      background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.45));
-      border-bottom: 1px solid rgba(15,40,52,0.04);
-      transition: box-shadow .25s var(--ease), background .35s var(--ease);
-    }
-    :root[data-theme="dark"] header {
-      background: linear-gradient(180deg, rgba(7,16,24,0.75), rgba(7,16,24,0.45));
-      border-bottom: 1px solid rgba(255,255,255,0.03);
-    }
-    .nav {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      height:72px;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 var(--bleed-padding);
-    }
-    .brand {
-      display:flex;align-items:center;gap:12px;
-    }
-    .brand img {
-      width:48px;height:48px;border-radius:10px;object-fit:contain;box-shadow:var(--soft-shadow);
-      background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.2));
-    }
-    .brand .title { font-weight:700;font-size:16px;letter-spacing:0.2px }
-    .brand .tag { font-size:12px;color:var(--muted) }
+    /* Dropdown panel */
+    .dropdown {
+      position:absolute;left:0;top:calc(100% + 12px);
+      min-width:220px;background:var(--bg-2);
+      border-radius:12px;padding:10px;border:1px solid rgba(15,40,52,0.04);
+      box-shadow: 0 12px 40px rgba(15,40,52,0.06);
+      opacity:0;transform:translateY(6px);pointer-events:none;transition:all .3s var(--ease); /* Smoother transition */
+    }
+    .dropdown.show{opacity:1;transform:none;pointer-events:auto}
+    .dropdown a{display:block;padding:8px 10px;border-radius:8px;color:var(--navy);}
+    .dropdown a:hover{background:rgba(15,40,52,0.08); color:var(--gold)} /* Interactive color on hover */
 
-    nav.primary { display:flex; align-items:center; gap:10px; }
-    .nav-link {
-      padding:8px 12px;border-radius:10px;font-weight:600;font-size:15px;color:var(--text);
-      background:transparent;border:0;cursor:pointer;transition: all .28s var(--ease);
-    }
-    .nav-link:hover { transform: translateY(-3px); background: var(--glass); }
-    .cta {
-      background: linear-gradient(90deg,var(--accent), var(--accent-2));
-      color: #072024;
-      padding:8px 12px;border-radius:12px;font-weight:800;margin-left:8px;
-      box-shadow: 0 8px 30px rgba(230,184,0,0.12);
-      transition: transform .25s var(--ease), box-shadow .25s var(--ease);
-    }
-    .cta:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(230,184,0,0.2); }
+    /* Mobile */
+    .menu-toggle { display:none;border:0;background:transparent;cursor:pointer }
+    @media (max-width:960px){
+      .nav-wrap { padding: 0 16px; }
+      nav.primary{ display:none }
+      .menu-toggle{ display:inline-flex }
+    }
 
-    .controls { display:flex; align-items:center; gap:8px; }
+    /* =========================
+       Hero - full width immersive
+       ========================= */
+    .hero-wrap {
+      width:100%;
+      padding: 68px 0 44px;
+      background: linear-gradient(180deg,#ffffff 0%, #fbfbfd 60%);
+      overflow:hidden;
+      position:relative;
+    }
 
-    /* Mobile nav */
-    .menu-toggle { display:none;border:0;background:transparent;cursor:pointer;padding:6px;border-radius:8px; }
-    @media (max-width:960px){
-      nav.primary{ display:none; }
-      .menu-toggle { display:inline-flex; }
-    }
+    .hero {
+      display:flex;gap:36px;align-items:center;
+      padding: 14px 28px;
+    }
 
-    /* ---------- Hero ---------- */
-    .hero-wrap {
-      width:100%;
-      padding: 64px 0 40px;
-      overflow:visible;
-      position:relative;
+    .hero-left { flex:1; max-width:800px }
+    .eyebrow {
+      display:inline-block;padding:8px 12px;border-radius:999px;background:linear-gradient(90deg, rgba(230,184,0,0.18), rgba(15,40,52,0.04));color:var(--gold);font-weight:700;font-size:13px;margin-bottom:14px;
+      transition: all .4s var(--ease); /* Added transition */
+    }
+    .eyebrow:hover {
+        background: linear-gradient(90deg, var(--gold), #d39f00); /* Interactive color change */
+        color: white;
     }
-    .hero {
-      display:flex;gap:36px;align-items:center; padding: 12px 0;
-    }
-    .hero-left { flex:1; max-width:760px; }
-    .eyebrow {
-      display:inline-block;padding:8px 12px;border-radius:999px;background:linear-gradient(90deg, rgba(230,184,0,0.12), rgba(15,40,52,0.04));color:var(--accent);font-weight:700;font-size:13px;margin-bottom:14px;
-      transition: all .35s var(--ease);
-    }
-    h1.hero-title {
-      margin:0;font-size:44px;line-height:1.02;font-weight:800;color:var(--text);
-      font-family: "Manrope", "Inter", sans-serif;
-      letter-spacing:-0.3px;
-      transition: transform .45s var(--ease), opacity .35s var(--ease);
-    }
-    p.lead { margin-top:12px;font-size:17px;color:var(--muted);max-width:64ch }
+    h1.hero-title {
+      margin:0;font-size:46px;line-height:1.02;font-weight:800;color:var(--navy);
+      font-family: 'Poppins', sans-serif;
+    }
+    p.lead { margin-top:12px;font-size:17px;color:var(--muted);max-width:58ch }
+    .hero-ctas { margin-top:22px;display:flex;gap:12px;flex-wrap:wrap;align-items:center }
 
-    .hero-ctas { margin-top:22px;display:flex;gap:12px;flex-wrap:wrap;align-items:center }
-    .btn { border:0;padding:12px 16px;border-radius:12px;font-weight:700;cursor:pointer;transition:all .35s var(--ease); }
-    .btn-primary { background: linear-gradient(90deg,var(--accent), var(--accent-2)); color:#072024; animation: pulse 3s infinite alternate; }
-    .btn-outline { background:transparent;border:1px solid rgba(15,40,52,0.06); color:var(--text); }
-    @keyframes pulse { 0% { box-shadow: 0 8px 26px rgba(230,184,0,0.08) } 100% { box-shadow: 0 18px 40px rgba(230,184,0,0.18) } }
-
-    .hero-right { flex:1.05; min-height:320px; display:flex;align-items:center;justify-content:center;gap:18px;position:relative }
-    .hero-deco {
-      position:absolute; right:-40px; top:-40px; width:360px; height:360px; border-radius:50%;
-      background: radial-gradient(circle at 30% 30%, rgba(230,184,0,0.14), rgba(15,40,52,0.04));
-      filter: blur(36px); pointer-events:none; transform:translateZ(0);
-      opacity:.95; transition: transform 1.5s var(--ease);
+    .btn {
+      border:0;padding:12px 16px;border-radius:12px;font-weight:700;cursor:pointer;
+      transition:all .35s var(--ease); /* Added smooth transition */
+    }
+    .btn-primary { 
+        background: linear-gradient(90deg,var(--gold), var(--gold-dark)); 
+        color:#032028; 
+        /* Pulse Animation */
+        animation: cta-pulse 3s infinite alternate ease-in-out;
+    }
+    .btn-primary:hover {
+        background: linear-gradient(90deg, #ffd700, #e6b800); /* Slightly brighter gold on hover */
+        transform: translateY(-3px);
+    }
+    .btn-outline { background:transparent;border:1px solid rgba(15,40,52,0.06);color:var(--navy) }
+    .btn-outline:hover {
+        background: var(--navy); 
+        color: white;
+        border-color: var(--navy);
+        transform: translateY(-3px);
     }
 
-    /* ---------- Tile Showcase ---------- */
-    .showcase {
-      margin-top:28px;
-      position:relative;
-    }
-    .tiles {
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap:18px;
-      align-items:stretch;
-    }
-    .tile {
-      background: linear-gradient(180deg, var(--bg-2), var(--bg));
-      border-radius:14px; overflow:hidden; position:relative;
-      border:1px solid rgba(15,40,52,0.04);
-      box-shadow: var(--card-shadow);
-      transition: transform .35s var(--ease), box-shadow .35s var(--ease), opacity .4s var(--ease);
-      min-height:180px;
-    }
-    .tile:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(15,40,52,0.12); }
-    .tile .thumb { height:160px; background-size:cover; background-position:center; }
-    .tile .meta { padding:12px; font-weight:700; font-family: "Manrope", sans-serif; }
-    .tile .sub { color:var(--muted); font-weight:600; font-size:13px; margin-top:6px; }
+    /* Right: hero illustration / cards */
+    .hero-right { flex:1.05; min-height:360px; display:flex;align-items:center;justify-content:center;gap:18px;position:relative }
+    .hero-cards { width:100%; display:grid;grid-template-columns:repeat(3,1fr);gap:18px }
+    .hc {
+      background:linear-gradient(180deg,#ffffff, #fbfbfd);
+      border-radius:16px;padding:18px;border:1px solid rgba(15,40,52,0.04);
+      box-shadow:var(--card-shadow);transition:transform .35s var(--ease), box-shadow .35s var(--ease); /* Smoother transition */
+    }
+    .hc:hover{transform:translateY(-8px); box-shadow: 0 25px 50px rgba(15,40,52,0.12)} /* Deeper shadow on hover */
+    .hc h4{margin:0;font-size:16px;color:var(--navy)}
+    .hc p{margin:8px 0 0;color:var(--muted);font-size:13px}
 
-    /* Edge treatment for the tile strip (bleed feel) */
-    .tile-strip {
-      margin-top:18px;
-      padding:12px 0;
+    /* subtle parallax shapes */
+    .hero-deco {
+      position:absolute;right:-80px;top:-60px;width:420px;height:420px;border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(230,184,0,0.20), rgba(15,40,52,0.05)); /* Increased color interactivity */
+      filter: blur(40px);pointer-events:none;transform:translateZ(0);
+      /* Floating Animation */
+      animation: subtle-move 20s infinite ease-in-out alternate;
+    }
+
+    /* =========================
+       Courses / sections (full width)
+       ========================= */
+    section { padding:48px 0; width:100%; }
+    .section-inner { max-width:var(--max-width); margin:0 auto; padding:0 28px; }
+
+    .section-title { display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px }
+    .section-title h3{margin:0;font-size:22px;color:var(--navy);font-weight:700}
+    .cards-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:18px }
+
+    .course-card {
+      background:linear-gradient(180deg,#fff,#fbfbfd);
+      border-radius:14px;padding:18px;border:1px solid rgba(15,40,52,0.04);
+      box-shadow: 0 12px 30px rgba(15,40,52,0.04);transition:transform .35s var(--ease),box-shadow .35s var(--ease), border-color .35s var(--ease); /* Smoother transition */
+    }
+    .course-card:hover{ 
+        transform:translateY(-10px); 
+        box-shadow: 0 35px 70px rgba(15,40,52,0.15); /* Deeper interactive shadow */
+        border-color: var(--gold); /* Interactive border color */
     }
-
-    /* ---------- Sections ---------- */
-    section { padding:48px 0; width:100%; }
-    .section-inner { max-width:var(--max-width); margin:0 auto; padding:0 var(--bleed-padding); }
-    .section-title { display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px }
-    .section-title h3{margin:0;font-size:22px;color:var(--text);font-weight:700}
-    .cards-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:18px; margin-top:12px; }
-
-    .card {
-      background: linear-gradient(180deg, var(--bg-2), rgba(0,0,0,0.01));
-      border-radius:12px; padding:18px; border:1px solid rgba(15,40,52,0.04);
-      box-shadow: var(--soft-shadow); transition: transform .3s var(--ease), box-shadow .3s var(--ease);
-      min-height:160px;
+    .course-card h4{margin:0 0 8px}
+    .course-card p{color:var(--muted);margin:0;font-size:14px}
+    .badge { 
+        display:inline-block;padding:6px 8px;border-radius:999px;background:rgba(15,40,52,0.05);font-size:12px;color:var(--muted);margin-top:12px;
+        transition: all .35s var(--ease); /* Added transition */
     }
-    .card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(15,40,52,0.12); }
-    .card h4 { margin:0 0 8px; font-family: "Manrope", sans-serif; }
-    .card p { color:var(--muted); margin:0; }
-
-    /* Notes placeholder */
-    .notes-placeholder {
-      display:flex; gap:18px; align-items:center; justify-content:space-between; padding:18px; border-radius:12px;
-      border:1px dashed rgba(15,40,52,0.06); background: linear-gradient(180deg, rgba(15,40,52,0.02), transparent);
-      color:var(--muted);
-    }
-    .coming { padding:8px 12px; border-radius:999px; font-weight:700; background: rgba(15,40,52,0.04); color:var(--text); }
-
-    /* Footer */
-    footer { padding:28px 0; border-top:1px solid rgba(15,40,52,0.04); background:transparent; }
-    .footer-inner { display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap; color:var(--muted); }
-
-    /* Reveal animation */
-    .reveal { opacity:0; transform: translateY(12px); transition: all .9s var(--ease); will-change: transform, opacity; }
-    .reveal.show { opacity:1; transform:none; }
-
-    /* Dark-mode friendly tweaks for smaller screens */
-    @media (max-width:1100px){
-      .hero{ flex-direction:column-reverse; gap:22px; }
-      .hero-right{ min-height:300px; }
-      .tiles { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-    }
-    @media (max-width:720px){
-      .brand .title { display:none; }
-      .tiles { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap:12px; }
-      h1.hero-title { font-size:34px; }
-      .nav { padding: 0 14px; }
+    .course-card:hover .badge {
+        background: var(--gold-dark); /* Color interaction on hover */
+        color: white;
     }
 
-    /* small utility */
-    .muted { color:var(--muted); }
-    .text-right { text-align:right; }
-    .center { text-align:center; }
 
-  </style>
+    /* =========================
+       Horizontal tile scroll (auto + drag + snap)
+       ========================= */
+    .tile-strip {
+      margin-top:18px;
+      overflow:hidden;
+      position:relative;
+      padding:12px 6px;
+    }
+    .tiles {
+      display:flex;gap:12px; align-items:stretch;
+      scroll-snap-type: x mandatory;
+      overflow-x:auto;
+      padding-bottom:8px;
+      -webkit-overflow-scrolling:touch;
+      scroll-behavior:smooth;
+    }
+    .tile {
+      flex:0 0 320px; height:200px; border-radius:12px; background:linear-gradient(180deg,#ffffff,#f8f9fb);
+      border:1px solid rgba(15,40,52,0.04); box-shadow: 0 12px 30px rgba(15,40,52,0.04);
+      scroll-snap-align:center; position:relative; overflow:hidden;
+      cursor:grab; transition:transform .35s var(--ease), box-shadow .35s var(--ease); /* Smoother transition */
+    }
+    .tile:active { cursor:grabbing }
+    .tile:hover { 
+        transform: translateY(-6px);
+        box-shadow: 0 18px 40px rgba(15,40,52,0.1); /* Interactive shadow */
+    }
+    .tile .img {
+      position:absolute;inset:0;background-size:cover;background-position:center;filter:contrast(95%) saturate(95%);
+    }
+    .tile .overlay {
+      position:absolute;inset:0;background:linear-gradient(180deg, transparent 40%, rgba(15,40,52,0.34) 100%);
+    }
+    .tile .meta {
+      position:absolute;left:14px;bottom:14px;color:#fff;z-index:3;
+      font-weight:700;text-shadow:0 8px 18px rgba(0,0,0,0.4);
+      transition: all .35s var(--ease); /* Added transition */
+    }
+    .tile:hover .meta {
+        transform: translateY(-5px); /* Meta text lifts with the tile */
+    }
+
+    /* Controls */
+    .tile-controls { display:flex;gap:8px;align-items:center;margin-left:8px }
+    .control-btn {
+      border:0;background:transparent;padding:8px;border-radius:8px;cursor:pointer;color:var(--navy);
+      box-shadow:0 6px 18px rgba(15,40,52,0.04);
+      background: #fff;
+      transition: all .3s var(--ease); /* Added transition */
+    }
+    .control-btn:hover {
+        background: var(--gold); /* Interactive color change */
+        color: white;
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(230,184,0,0.3);
+    }
+
+    /* =========================
+       Notes / About / Contact
+       ========================= */
+    .notes-grid { display:flex;gap:18px;flex-wrap:wrap }
+    .note-card { 
+        flex:1; min-width:260px; background:linear-gradient(180deg,#fff,#fbfbfd);border-radius:12px;padding:14px;border:1px solid rgba(15,40,52,0.04);
+        transition: all .35s var(--ease); /* Added transition */
+    }
+    .note-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 40px rgba(15,40,52,0.1);
+        border-color: var(--gold);
+    }
+
+    .about-split { display:flex;gap:28px;align-items:center }
+    .about-img { flex:1; min-height:260px;border-radius:14px;background:linear-gradient(180deg,#fff,#f6f8fb);border:1px solid rgba(15,40,52,0.04) }
+    .about-text { flex:1.2 }
+
+    /* Contact form */
+    .contact-form { max-width:720px; background:linear-gradient(180deg,#fff,#fbfbfd);border-radius:12px;padding:18px;border:1px solid rgba(15,40,52,0.04) }
+    .input, textarea { 
+        width:100%;padding:12px;border-radius:10px;border:1px solid rgba(15,40,52,0.06);background:transparent;outline:none;color:var(--navy);font-size:14px;
+        transition: border-color .3s ease, box-shadow .3s ease; /* Added transition */
+    }
+    .input:focus, textarea:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 2px rgba(230,184,0,0.3);
+    }
+    textarea { resize:vertical; min-height:120px }
+
+    /* Footer */
+    footer { padding:28px 0;border-top:1px solid rgba(15,40,52,0.04);background:transparent }
+    .footer-inner { display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap }
+
+    /* Small responsiveness */
+    @media (max-width:1100px){
+      .hero{flex-direction:column-reverse;gap:22px}
+      .hero-right{min-height:320px}
+      .cards-grid{ grid-template-columns: repeat(2,1fr) }
+      .tiles .tile{ flex:0 0 280px; height:180px }
+    }
+    @media (max-width:720px){
+      .nav-wrap{padding:0 16px}
+      .brand .title{display:none}
+      .hc{ display:none }
+      .cards-grid{ grid-template-columns: 1fr }
+      .tiles .tile{ flex:0 0 88%; height:190px }
+    }
+
+    /* reveal animation */
+    .reveal { opacity:0; transform:translateY(12px); transition: all .9s var(--ease) }
+    .reveal.show { opacity:1; transform:none }
+  </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="nav inner nav">
-      <div class="brand" aria-hidden="false">
-        <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=160&auto=format&fit=crop&sat= -20" alt="Xpertz logo" onerror="this.style.display='none'">
-        <div>
-          <div class="title">Xpertz Tutorials</div>
-          <div class="tag muted">Learn • Master • Excel</div>
-        </div>
-      </div>
+  <!-- HEADER -->
+  <header>
+    <div class="nav-wrap">
+      <div class="brand" aria-hidden="false">
+        <img src="xpertz-logo.png" alt="Xpertz Tutorials logo" onerror="this.style.display='none'">
+        <div>
+          <div class="title">Xpertz Tutorials</div>
+          <div class="tag">Learn • Master • Excel</div>
+        </div>
+      </div>
 
-      <nav class="primary" aria-label="Main navigation">
-        <a class="nav-link" href="#courses">Courses</a>
-        <a class="nav-link" href="#showcase">Showcase</a>
-        <a class="nav-link" href="#notes">Notes</a>
-        <a class="nav-link" href="#contact">Contact</a>
-        <a class="cta" href="#enroll">Enroll</a>
-      </nav>
+      <nav class="primary" aria-label="Main navigation">
+        <div class="nav-item">
+          <button class="nav-link" data-dd="courses" aria-expanded="false">Courses ▾</button>
+          <div class="dropdown" id="dd-courses" role="menu" aria-hidden="true">
+            <a href="#courses">All Courses</a>
+            <a href="#courses">STEM Foundations</a>
+            <a href="#courses">English & Humanities</a>
+            <a href="#courses">Competitive Prep</a>
+          </div>
+        </div>
 
-      <div class="controls">
-        <button id="themeToggle" class="nav-link" aria-label="Toggle theme">🌓</button>
-        <button class="menu-toggle" id="mobileOpen" aria-label="Open menu">☰</button>
-      </div>
-    </div>
-  </header>
+        <div class="nav-item">
+          <button class="nav-link" data-dd="notes" aria-expanded="false">Notes ▾</button>
+          <div class="dropdown" id="dd-notes" role="menu" aria-hidden="true">
+            <a href="#notes">Class Notes (3–10)</a>
+            <a href="#notes">Revision Sheets</a>
+            <a href="#notes">Download Center</a>
+          </div>
+        </div>
 
-  <!-- MOBILE MENU -->
-  <div id="mobileMenu" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:120;padding:26px;overflow:auto;color:#fff">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-      <div style="display:flex;gap:12px;align-items:center">
-        <div style="width:44px;height:44px;border-radius:8px;background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.2))"></div>
-        <div style="font-weight:800">Xpertz Tutorials</div>
-      </div>
-      <button id="mobileClose" style="background:transparent;border:0;color:#fff;font-size:28px;cursor:pointer">&times;</button>
-    </div>
+        <div class="nav-item"><button class="nav-link" data-dd="class38" aria-expanded="false">Class 3–8 ▾</button>
+          <div class="dropdown" id="dd-class38" role="menu" aria-hidden="true">
+            <a href="#courses">Primary Math</a>
+            <a href="#courses">Science Explorers</a>
+            <a href="#courses">English Basics</a>
+          </div>
+        </div>
 
-    <nav style="display:flex;flex-direction:column;gap:12px">
-      <a href="#courses" onclick="closeMobile()">Courses</a>
-      <a href="#showcase" onclick="closeMobile()">Showcase</a>
-      <a href="#notes" onclick="closeMobile()">Notes</a>
-      <a href="#contact" onclick="closeMobile()">Contact</a>
-      <a href="#enroll" class="cta" style="display:inline-block;margin-top:8px" onclick="closeMobile()">Enroll</a>
-    </nav>
-  </div>
+        <div class="nav-item"><button class="nav-link" data-dd="class910" aria-expanded="false">Class 9–10 ▾</button>
+          <div class="dropdown" id="dd-class910" role="menu" aria-hidden="true">
+            <a href="#courses">English Language & Lit</a>
+            <a href="#courses">Social Studies (History & Geo)</a>
+          </div>
+        </div>
 
-  <!-- HERO -->
-  <div class="hero-wrap full-bleed edge">
-    <div class="inner hero" role="region" aria-label="Intro">
-      <div class="hero-left">
-        <div class="eyebrow">New — Curated learning paths</div>
-        <h1 class="hero-title reveal">Small lessons. Big results.</h1>
-        <p class="lead reveal">Xpertz Tutorials delivers focused, bite-sized lessons, concise notes, and practice-driven assessments for students. Carefully designed for clarity and consistent progress.</p>
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#contact">Contact</a>
 
-        <div class="hero-ctas reveal">
-          <button class="btn btn-primary" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'})">Explore Classes</button>
-          <button class="btn btn-outline" onclick="document.getElementById('showcase').scrollIntoView({behavior:'smooth'})">View Showcase</button>
-        </div>
+        <a class="cta" href="#enroll">Enroll</a>
+      </nav>
 
-        <div style="display:flex;gap:12px;margin-top:18px" class="reveal">
-          <div class="muted small">Trusted by learners across India</div>
-        </div>
-      </div>
+      <button class="menu-toggle" aria-label="Open menu" id="mobileOpen">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="#0f2834" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
 
-      <div class="hero-right">
-        <div class="card" style="width:100%;max-width:460px;">
-          <div style="padding:14px">
-            <h4 style="margin:0 0 6px">Quick overview</h4>
-            <p class="muted" style="margin:0 0 12px">Structured programmes for Class 3–10, bite-sized lessons, and clear revision material.</p>
-            <div style="display:flex;gap:10px">
-              <div style="flex:1">
-                <div style="font-size:12px;color:var(--muted)">Students</div>
-                <div style="font-weight:800;font-size:20px">12k+</div>
-              </div>
-              <div style="flex:1">
-                <div style="font-size:12px;color:var(--muted)">Courses</div>
-                <div style="font-weight:800;font-size:20px">35</div>
-              </div>
-            </div>
-          </div>
-        </div>
+  <!-- HERO -->
+  <div class="hero-wrap full-bleed">
+    <div class="inner hero" role="region" aria-label="Intro">
+      <div class="hero-left">
+        <div class="eyebrow">New — curated learning paths</div>
+        <h1 class="hero-title">Build deep understanding. <br> Score higher with confident study.</h1>
+        <p class="lead">Xpertz Tutorials offers focused, bite-sized lessons, clear revision notes, and practice-driven assessments for students in classes 3–10. Learn from expert instructors and level up — step by step.</p>
 
-        <div class="hero-deco" aria-hidden="true"></div>
-      </div>
-    </div>
-  </div>
+        <div class="hero-ctas">
+          <button class="btn btn-primary" onclick="location.href='#courses'">Explore Courses</button>
+          <button class="btn btn-outline" onclick="location.href='#notes'">Get Notes</button>
+          <button class="btn" onclick="openJoin()" style="background:transparent;border:1px solid rgba(15,40,52,0.06);">Watch Intro</button>
+        </div>
 
-  <!-- SHOWCASE (tile-like images) -->
-  <section id="showcase" class="full-bleed" style="background:linear-gradient(180deg,transparent, rgba(0,0,0,0.02));">
-    <div class="section-inner inner">
-      <div class="section-title">
-        <div>
-          <h3>Showcase</h3>
-          <div style="color:var(--muted);margin-top:6px">Visual highlights from our lessons and resources.</div>
-        </div>
-        <div class="text-right muted">Swipe • Drag • Click</div>
-      </div>
+        <div style="display:flex;gap:10px;margin-top:18px">
+          <div class="small" style="color:var(--muted)">Trusted by learners across India</div>
+        </div>
+      </div>
 
-      <div class="tile-strip edge reveal">
-        <div class="tiles" id="tiles">
-          <!-- Tiles (placeholders from Unsplash) -->
-          <div class="tile">
-            <div class="thumb" style="background-image:linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.02)), url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1200&q=60');"></div>
-            <div class="meta">Interactive Quizzes <div class="sub">Short practice checks</div></div>
-          </div>
+      <div class="hero-right" aria-hidden="false">
+        <div class="hero-cards" aria-hidden="true">
+          <div class="hc">
+            <h4>Interactive Lessons</h4>
+            <p>Short modules with checkpoints and examples.</p>
+          </div>
+          <div class="hc">
+            <h4>Concise Notes</h4>
+            <p>High-quality revision sheets for quick recall.</p>
+          </div>
+          <div class="hc">
+            <h4>Practice Tests</h4>
+            <p>Periodic assessments with instant feedback.</p>
+          </div>
+          <!-- Ensuring all three cards are visible to match the style -->
+        </div>
 
-          <div class="tile">
-            <div class="thumb" style="background-image:linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.02)), url('https://images.unsplash.com/photo-1517976487492-6b1acb260507?auto=format&fit=crop&w=1200&q=60');"></div>
-            <div class="meta">Animated Lessons <div class="sub">Concise visual explanations</div></div>
-          </div>
+        <div class="hero-deco" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
 
-          <div class="tile">
-            <div class="thumb" style="background-image:linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.02)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=60');"></div>
-            <div class="meta">Practice Tests <div class="sub">Timed mock tests</div></div>
-          </div>
+  <!-- COURSES -->
+  <section id="courses" class="full-bleed">
+    <div class="section-inner inner reveal">
+      <div class="section-title">
+        <div>
+          <h3>Popular Courses</h3>
+          <div style="color:var(--muted);margin-top:6px">Structured paths for every grade and goal.</div>
+        </div>
+        <div>
+          <a class="btn btn-outline" href="#courses">View all</a>
+        </div>
+        
+      </div>
 
-          <div class="tile">
-            <div class="thumb" style="background-image:linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.02)), url('https://images.unsplash.com/photo-1515165562835-c3f7fd3a8c0a?auto=format&fit=crop&w=1200&q=60');"></div>
-            <div class="meta">Concise Notes <div class="sub">Ready-to-download sheets</div></div>
-          </div>
+      <div class="cards-grid">
+        <div class="course-card reveal">
+          <h4>Foundations — Mathematics (Class 3–5)</h4>
+          <p>Friendly foundations, visual learning and practice in Arithmetic and early Algebra.</p>
+          <div class="badge">Class 3–5 • Interactive</div>
+        </div>
 
-          <div class="tile">
-            <div class="thumb" style="background-image:linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.02)), url('https://images.unsplash.com/photo-1487019157116-4b2b2f3f0b14?auto=format&fit=crop&w=1200&q=60');"></div>
-            <div class="meta">Progress Tracking <div class="sub">Track improvement</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        <div class="course-card reveal">
+          <h4>Science Explorers (Class 6–8)</h4>
+          <p>Experiments, diagrams, and clear explanatory notes covering Physics, Chemistry, and Biology.</p>
+          <div class="badge">Class 6–8 • Hands-on</div>
+        </div>
 
-  <!-- COURSES (Two sections only) -->
-  <section id="courses" class="full-bleed">
-    <div class="section-inner inner reveal">
-      <div class="section-title">
-        <div>
-          <h3>Class 3–8 • All Subjects</h3>
-          <div style="color:var(--muted);margin-top:6px">Foundations, practice & concept clarity across math, science, language and more.</div>
-        </div>
-        <div>
-          <a class="btn btn-outline" href="#enroll">Enroll</a>
-        </div>
-      </div>
+        <div class="course-card reveal">
+          <h4>English Language & Lit (Class 9–10)</h4>
+          <p>Master literary analysis, comprehension, and grammar rules for board exams.</p>
+          <div class="badge">Class 9–10 • Literature Focus</div>
+        </div>
+        
+        <div class="course-card reveal">
+          <h4>Social Science Deep Dive (Class 9–10)</h4>
+          <p>In-depth notes on History, Geography, Civics, and Economics for concept clarity.</p>
+          <div class="badge">Class 9–10 • Humanities</div>
+        </div>
 
-      <div class="cards-grid">
-        <div class="card">
-          <h4>Foundations — Mathematics</h4>
-          <p class="muted">Visual learning and problem practice to build a strong base.</p>
-        </div>
+        <div class="course-card reveal">
+          <h4>All Subjects Mega Pack (Class 7)</h4>
+          <p>A bundled course covering Math, Science, and Social Science for Class 7 students.</p>
+          <div class="badge">Class 7 • Complete Pack</div>
+        </div>
 
-        <div class="card">
-          <h4>Science Explorers</h4>
-          <p class="muted">Hands-on explanations, diagrams and concept maps.</p>
-        </div>
+        <div class="course-card reveal">
+          <h4>Primary Language Skills (Class 3–5)</h4>
+          <p>Building strong reading, writing, and vocabulary fundamentals.</p>
+          <div class="badge">Class 3–5 • Language Arts</div>
+        </div>
+      </div>
 
-        <div class="card">
-          <h4>Languages & Literacy</h4>
-          <p class="muted">Reading, comprehension & grammar practice.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+      <!-- Horizontal tile strip -->
+      <div style="margin-top:28px">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div style="font-weight:700;font-size:18px">Highlights</div>
+          <div class="tile-controls">
+            <button class="control-btn" id="tilePrev" aria-label="previous">◀</button>
+            <button class="control-btn" id="tileNext" aria-label="next">▶</button>
+        </div>
+        </div>
 
-  <section id="courses-910" class="full-bleed" style="background:linear-gradient(180deg,transparent, rgba(0,0,0,0.01));">
-    <div class="section-inner inner reveal">
-      <div class="section-title">
-        <div>
-          <h3>Class 9–10 • English & Social Studies</h3>
-          <div style="color:var(--muted);margin-top:6px">Exam-oriented strategies, advanced problem solving and strong concept coverage.</div>
-        </div>
-        <div>
-          <a class="btn btn-outline" href="#enroll">View details</a>
-        </div>
-      </div>
+        <div class="tile-strip">
+          <div class="tiles" id="tiles">
+            <!-- Placeholder tiles (replace backgrounds with real images later) -->
+            <div class="tile" tabindex="0">
+              <div class="img" style="background-image:linear-gradient(180deg, rgba(230,184,0,0.12), rgba(15,40,52,0.08)), url('https://images.unsplash.com/photo-1584697964154-2a0f9b1f9d8b?auto=format&fit=crop&w=1200&q=60');"></div>
+              <div class="overlay"></div>
+              <div class="meta">Interactive Quizzes</div>
+            </div>
 
-      <div class="cards-grid">
-        <div class="card">
-          <h4>English (Language & Literature)</h4>
-          <p class="muted">Comprehension, writing practice and literature notes for board exams.</p>
-        </div>
+            <div class="tile" tabindex="0">
+              <div class="img" style="background-image:linear-gradient(180deg, rgba(15,40,52,0.06), rgba(15,40,52,0.12)), url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=60');"></div>
+              <div class="overlay"></div>
+              <div class="meta">Live Doubt Solving</div>
+            </div>
 
-        <div class="card">
-          <h4>Social Studies</h4>
-          <p class="muted">History, Civics and Geography with timeline-based revisions & maps.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+            <div class="tile" tabindex="0">
+              <div class="img" style="background-image:linear-gradient(180deg, rgba(230,184,0,0.06), rgba(15,40,52,0.08)), url('https://images.unsplash.com/photo-1523580846011-d3a5bc25702f?auto=format&fit=crop&w=1200&q=60');"></div>
+              <div class="overlay"></div>
+              <div class="meta">Compact Notes</div>
+            </div>
 
-  <!-- NOTES (coming soon) -->
-  <section id="notes" class="full-bleed">
-    <div class="section-inner inner reveal">
-      <div class="section-title">
-        <div>
-          <h3>Notes & Revision</h3>
-          <div style="color:var(--muted);margin-top:6px">Concise summary sheets — coming soon.</div>
-        </div>
-        <div><span class="coming">Coming Soon</span></div>
-      </div>
+            <div class="tile" tabindex="0">
+              <div class="img" style="background-image:linear-gradient(180deg, rgba(15,40,52,0.06), rgba(15,40,52,0.12)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=60');"></div>
+              <div class="overlay"></div>
+              <div class="meta">Progress Tracking</div>
+            </div>
 
-      <div class="notes-placeholder">
-        <div>
-          <strong>Notes — Coming Soon</strong>
-          <div class="muted" style="margin-top:6px">We are building crisp downloadable notes and formula sheets. Stay tuned — we will add the download center soon.</div>
-        </div>
-        <div class="muted">Estimated rollout: next update</div>
-      </div>
-    </div>
-  </section>
+            <div class="tile" tabindex="0">
+              <div class="img" style="background-image:linear-gradient(180deg, rgba(230,184,0,0.06), rgba(15,40,52,0.08)), url('https://images.unsplash.com/photo-1521747116042-5a810fda9664?auto=format&fit=crop&w=1200&q=60');"></div>
+              <div class="overlay"></div>
+              <div class="meta">Mentor Feedback</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="full-bleed" style="background:linear-gradient(180deg,transparent, rgba(0,0,0,0.01));">
-    <div class="section-inner inner reveal">
-      <div class="section-title">
-        <div>
-          <h3>Get in touch</h3>
-          <div style="color:var(--muted);margin-top:6px">Questions, demo classes, or partnership enquiries.</div>
-        </div>
-        <div>
-          <a class="btn btn-primary" href="#enroll">Request a Demo</a>
-        </div>
-      </div>
+  <!-- NOTES -->
+  <section id="notes" class="full-bleed" style="background:linear-gradient(180deg,#ffffff,#fbfbfd);">
+    <div class="section-inner inner reveal">
+      <div class="section-title">
+        <div>
+          <h3>Notes & Revision</h3>
+          <div style="color:var(--muted);margin-top:6px">Download crisp summary notes and formula sheets.</div>
+        </div>
+        <div>
+          <a class="btn btn-primary" href="#notes">View All Notes</a>
+        </div>
+      </div>
 
-      <div style="display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap">
-        <div style="flex:1;min-width:280px">
-          <h4 style="margin:0 0 8px">Contact</h4>
-          <div class="muted">Email: hello@xpertztutorials.com</div>
-          <div class="muted" style="margin-top:6px">Phone: +91 98765 43210</div>
-        </div>
-        <aside style="width:320px">
-          <div style="background:linear-gradient(180deg,#fff, rgba(0,0,0,0.02));border-radius:12px;padding:16px;border:1px solid rgba(15,40,52,0.04)">
-            <strong>Office</strong>
-            <div style="color:var(--muted);margin-top:8px">Mumbai, India</div>
-          </div>
-        </aside>
-      </div>
-    </div>
-  </section>
+      <div class="notes-grid">
+        <div class="note-card reveal">
+          <strong>Class 8: Complete Science Notes</strong>
+          <p style="color:var(--muted);margin-top:8px">Covers all chapters including Crop Production and Microorganisms.</p>
+        </div>
+        <div class="note-card reveal">
+          <strong>Class 9: Social Science - History Summary</strong>
+          <p style="color:var(--muted);margin-top:8px">Chapter-wise summaries for easy recall of key historical events.</p>
+        </div>
+        <div class="note-card reveal">
+          <strong>Class 10: English - Grammar Guide</strong>
+          <p style="color:var(--muted);margin-top:8px">Comprehensive guide to Tenses, Modals, and Passive Voice.</p>
+        </div>
+        <div class="note-card reveal">
+          <strong>Class 6: Mathematics - Key Concepts</strong>
+          <p style="color:var(--muted);margin-top:8px">Illustrated notes for Geometry and Basic Algebra principles.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-inner inner">
-      <div style="color:var(--muted)">© <strong>Xpertz Tutorials</strong> — 2025</div>
-      <div style="color:var(--muted)">Privacy · Terms · Sitemap</div>
-      <div style="color:var(--muted)"></div>
-    </div>
-  </footer>
+  <!-- ABOUT -->
+  <section id="about" class="full-bleed">
+    <div class="section-inner inner reveal">
+      <div class="about-split">
+        <div class="about-text">
+          <h3>About Xpertz Tutorials</h3>
+          <p style="color:var(--muted);margin-top:10px">Xpertz Tutorials was founded on the principle of **Clarity First**. We recognized the need for educational content that is not only accurate but also simple, structured, and easy to consume. Our team of experienced educators focuses exclusively on foundational concepts for the 3rd to 10th grades.</p>
+            <p style="color:var(--muted);margin-top:10px">By combining deep subject matter expertise with modern, interactive web design, we ensure that students spend less time navigating complexity and more time building genuine subject mastery. Our content is continuously refined based on user feedback and curriculum updates.</p>
+          <ul style="color:var(--muted);margin-top:12px">
+            <li>Structured learning paths</li>
+            <li>Short lessons for busy students</li>
+            <li>Hands-on practice & instant feedback</li>
+          </ul>
+        </div>
 
-  <script>
-    // ---------- Dark mode: auto-detect + toggle ----------
-    (function(){
-      const root = document.documentElement;
-      const stored = localStorage.getItem('xpertz-theme');
-      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      function applyTheme(t){
-        if(t === 'dark') root.setAttribute('data-theme','dark');
-        else root.removeAttribute('data-theme');
-      }
-      let theme = stored || (prefersDark ? 'dark' : 'light');
-      applyTheme(theme);
-      document.getElementById('themeToggle').addEventListener('click', ()=>{
-        theme = (theme === 'dark') ? 'light' : 'dark';
-        localStorage.setItem('xpertz-theme', theme);
-        applyTheme(theme);
-      });
-    })();
+        <div class="about-img" aria-hidden="true" style="background-image: linear-gradient(180deg, rgba(230,184,0,0.06), rgba(15,40,52,0.02));"></div>
+      </div>
+    </div>
+  </section>
 
-    // ---------- Mobile menu ----------
-    const mobileOpen = document.getElementById('mobileOpen');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const mobileClose = document.getElementById('mobileClose');
-    function closeMobile(){ mobileMenu.style.display='none'; document.body.style.overflow=''; }
-    mobileOpen && mobileOpen.addEventListener('click', ()=>{
-      mobileMenu.style.display='block'; document.body.style.overflow='hidden';
-    });
-    mobileClose && mobileClose.addEventListener('click', closeMobile);
+  <!-- CONTACT -->
+  <section id="contact" class="full-bleed" style="background:var(--bg-1);">
+    <div class="section-inner inner reveal">
+      <div style="display:flex;align-items:flex-start;gap:28px;flex-wrap:wrap">
+        <div style="flex:1;min-width:320px">
+          <h3>Get in touch</h3>
+          <p style="color:var(--muted);margin-top:8px">Have questions or want a demo class? Drop us a message and we'll respond within one business day.</p>
 
-    // ---------- Reveal on scroll ----------
-    (function(){
-      const reveals = document.querySelectorAll('.reveal');
-      const obs = new IntersectionObserver((entries)=>{
-        entries.forEach(entry=>{
-          if(entry.isIntersecting) entry.target.classList.add('show');
-        });
-      }, {threshold:0.12});
-      reveals.forEach(r=>obs.observe(r));
-    })();
+          <form id="contactForm" class="contact-form" style="margin-top:14px">
+            <input class="input" name="name" placeholder="Full name" required />
+            <input class="input" name="email" placeholder="Email address" required style="margin-top:8px"/>
+            <textarea name="message" placeholder="How can we help?" required style="margin-top:8px"></textarea>
+            <div style="display:flex;gap:8px;margin-top:10px">
+              <button class="btn btn-primary" type="submit">Send message</button>
+              <button class="btn btn-outline" type="button" onclick="location.href='#enroll'">Enroll</button>
+            </div>
+            <div id="formMsg" style="margin-top:8px;color:var(--muted)"></div>
+          </form>
+        </div>
 
-    // ---------- Tiles: simple drag-to-scroll for touch/desktop ----------
-    (function(){
-      const tiles = document.getElementById('tiles');
-      if(!tiles) return;
-      let isDown = false, startX, scrollLeft;
-      tiles.addEventListener('mousedown', (e)=>{
-        isDown = true; tiles.classList.add('active');
-        startX = e.pageX - tiles.offsetLeft;
-        scrollLeft = tiles.scrollLeft;
-        tiles.style.cursor = 'grabbing';
-      });
-      tiles.addEventListener('mouseleave', ()=>{ isDown=false; tiles.classList.remove('active'); tiles.style.cursor='grab'; });
-      tiles.addEventListener('mouseup', ()=>{ isDown=false; tiles.classList.remove('active'); tiles.style.cursor='grab'; });
-      tiles.addEventListener('mousemove', (e)=>{
-        if(!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - tiles.offsetLeft;
-        const walk = (x - startX) * 1.2;
-        tiles.scrollLeft = scrollLeft - walk;
-      });
+        <aside style="width:320px">
+          <div style="background:linear-gradient(180deg,#fff,#fbfbfd);border-radius:12px;padding:16px;border:1px solid rgba(15,40,52,0.04)">
+            <strong>Contact</strong>
+            <div style="color:var(--muted);margin-top:8px">Email: hello@xpertztutorials.com</div>
+            <div style="color:var(--muted);margin-top:2px">Phone: +91 98765 43210</div>
+            <div style="color:var(--muted);margin-top:10px"><strong>Office</strong><div style="margin-top:6px;color:var(--muted)">Mumbai, India</div></div>
+          </div>
+        </aside>
+      </div>
+      
+    </div>
+  </section>
 
-      // touch
-      let tStartX = 0, tStartScroll = 0;
-      tiles.addEventListener('touchstart', (e)=>{
-        tStartX = e.touches[0].pageX; tStartScroll = tiles.scrollLeft;
-      }, {passive:true});
-      tiles.addEventListener('touchmove', (e)=>{
-        const x = e.touches[0].pageX; const walk = (x - tStartX) * 1.2;
-        tiles.scrollLeft = tStartScroll - walk;
-      }, {passive:true});
-    })();
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner inner">
+      <div style="color:var(--muted)">© <strong>Xpertz Tutorials</strong> — 2025</div>
+      <div style="color:var(--muted)">Privacy · Terms · Sitemap</div>
+      <div style="color:var(--muted)"></div>
+    </div>
+  </footer>
 
-    // ---------- Accessibility: close overlays on Esc ----------
-    document.addEventListener('keydown', (e)=>{
-      if(e.key === 'Escape') closeMobile();
-    });
+  <!-- Mobile menu panel -->
+  <div id="mobileMenu" style="display:none;position:fixed;inset:0;background:rgba(15,40,52,0.8);z-index:120;padding:26px;overflow:auto;color:#fff">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <div style="display:flex;gap:12px;align-items:center">
+        <img src="xpertz-logo.png" alt="" style="width:44px;height:44px;object-fit:contain;border-radius:8px">
+        <div style="font-weight:800">Xpertz Tutorials</div>
+      </div>
+      <button id="mobileClose" style="background:transparent;border:0;color:#fff;font-size:28px;cursor:pointer">&times;</button>
+      
+    </div>
 
-    // ---------- Clean fallback for missing images ----------
-    document.querySelectorAll('img').forEach(img=>{
-      img.addEventListener('error', ()=> { img.style.display='none'; });
-    });
-  </script>
+    <nav style="display:flex;flex-direction:column;gap:12px">
+      <a href="#courses" onclick="closeMobile()">Courses</a>
+      <a href="#notes" onclick="closeMobile()">Notes</a>
+      <a href="#class38" onclick="closeMobile()">Class 3–8</a>
+      <a href="#class910" onclick="closeMobile()">Class 9–10</a>
+      <a href="#about" onclick="closeMobile()">About</a>
+      <a href="#contact" onclick="closeMobile()">Contact</a>
+      <a href="#enroll" class="cta" style="display:inline-block;margin-top:8px" onclick="closeMobile()">Enroll</a>
+    </nav>
+  </div>
 
+  <script>
+    /* ---------------------------
+       Dropdown interactions
+       --------------------------- */
+    document.querySelectorAll('[data-dd]').forEach(btn=>{
+      const key = btn.dataset.dd;
+      const panel = document.getElementById('dd-' + key);
+      btn.addEventListener('click', (e)=>{
+        const open = panel.classList.contains('show');
+        document.querySelectorAll('.dropdown').forEach(d=>d.classList.remove('show'));
+        document.querySelectorAll('[data-dd]').forEach(b=>b.setAttribute('aria-expanded','false'));
+        if(!open){ panel.classList.add('show'); btn.setAttribute('aria-expanded','true'); panel.setAttribute('aria-hidden','false') }
+      });
+    });
+    document.addEventListener('click', (e)=>{
+      if(!e.target.closest('.nav-item')) {
+        document.querySelectorAll('.dropdown').forEach(d=>d.classList.remove('show'));
+        document.querySelectorAll('[data-dd]').forEach(b=>b.setAttribute('aria-expanded','false'));
+      }
+    });
+
+    /* ---------------------------
+       Reveal on scroll
+       --------------------------- */
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting) entry.target.classList.add('show');
+      });
+    }, {threshold: 0.12});
+    reveals.forEach(r=>obs.observe(r));
+
+    /* ---------------------------
+       Tiles: drag-to-scroll + autoplay + controls
+       --------------------------- */
+    const tiles = document.getElementById('tiles');
+    let isDown = false, startX, scrollLeft;
+    if(tiles){
+      tiles.addEventListener('mousedown', (e)=>{
+        isDown = true; tiles.classList.add('active'); startX = e.pageX - tiles.offsetLeft; scrollLeft = tiles.scrollLeft;
+      });
+      tiles.addEventListener('mouseleave', ()=>{ isDown=false; tiles.classList.remove('active') });
+      tiles.addEventListener('mouseup', ()=>{ isDown=false; tiles.classList.remove('active') });
+      tiles.addEventListener('mousemove', (e)=>{
+        if(!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - tiles.offsetLeft;
+        const walk = (x - startX) * 1.2;
+        tiles.scrollLeft = scrollLeft - walk;
+      });
+
+      // touch drag
+      let touchStartX = 0, touchStartScroll = 0;
+      tiles.addEventListener('touchstart', (e)=>{
+        touchStartX = e.touches[0].pageX; touchStartScroll = tiles.scrollLeft;
+      }, {passive:true});
+      tiles.addEventListener('touchmove', (e)=>{
+        const x = e.touches[0].pageX; const walk = (x - touchStartX) * 1.2;
+        tiles.scrollLeft = touchStartScroll - walk;
+      }, {passive:true});
+    }
+
+    // autoplay: gentle auto-scroll loop
+    let tileAuto;
+    function startTileAuto(){
+      if(!tiles) return;
+      tileAuto = setInterval(()=>{
+        // scroll by one tile width (approx)
+        const w = tiles.querySelector('.tile')?.offsetWidth || 320;
+        if(tiles.scrollLeft + tiles.clientWidth >= tiles.scrollWidth - 10) {
+          tiles.scrollTo({left:0, behavior:'smooth'});
+        } else {
+          tiles.scrollBy({left: w + 12, behavior:'smooth'});
+        }
+      }, 3800);
+    }
+    function stopTileAuto(){
+      clearInterval(tileAuto);
+    }
+    tiles?.addEventListener('mouseenter', stopTileAuto);
+    tiles?.addEventListener('mouseleave', startTileAuto);
+    startTileAuto();
+
+    // manual controls
+    document.getElementById('tileNext').addEventListener('click', ()=>{
+      const w = tiles.querySelector('.tile')?.offsetWidth || 320;
+      tiles.scrollBy({left: w + 12, behavior:'smooth'});
+    });
+    document.getElementById('tilePrev').addEventListener('click', ()=>{
+      const w = tiles.querySelector('.tile')?.offsetWidth || 320;
+      tiles.scrollBy({left: -(w + 12), behavior:'smooth'});
+    });
+
+    /* ---------------------------
+       Mobile menu open/close
+       --------------------------- */
+    const mobileOpen = document.getElementById('mobileOpen');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileClose = document.getElementById('mobileClose');
+    function closeMobile(){ mobileMenu.style.display='none'; document.body.style.overflow=''; }
+    mobileOpen.addEventListener('click', ()=>{
+      mobileMenu.style.display='block'; document.body.style.overflow='hidden';
+    });
+    mobileClose.addEventListener('click', closeMobile);
+
+    /* ---------------------------
+       Simple contact form demo
+       --------------------------- */
+    const contactForm = document.getElementById('contactForm'), formMsg = document.getElementById('formMsg');
+    contactForm?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      formMsg.textContent = 'Sending...';
+      setTimeout(()=>{
+        formMsg.style.color = 'var(--gold)';
+        formMsg.textContent = 'Thanks — your message has been received!';
+        contactForm.reset();
+      }, 900);
+    });
+
+    /* ---------------------------
+       Small helper: open join modal (demo)
+       --------------------------- */
+    function openJoin(){
+      alert('Thanks for your interest — integrate your video or modal here later.');
+    }
+
+    /* ---------------------------
+       Accessibility: close dropdowns on Esc
+       --------------------------- */
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape'){
+        document.querySelectorAll('.dropdown').forEach(d=>d.classList.remove('show'));
+        closeMobile();
+      }
+    });
+  </script>
 </body>
 </html>
+
