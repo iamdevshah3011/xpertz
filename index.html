@@ -4,86 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xpertz Tutorials</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="xpertz-logo.png">
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <div class="container">
-            <img src="assets/xpertz-logo.png" alt="Xpertz Logo" class="logo">
-            <nav>
-                <ul>
-                    <li><button class="scroll-btn" data-target="#classes">Classes</button></li>
-                    <li><button class="scroll-btn" data-target="#achievements">Achievements</button></li>
-                    <li><button class="scroll-btn" data-target="#notes">Notes</button></li>
-                    <li><button id="darkModeToggle">Dark Mode</button></li>
-                </ul>
-            </nav>
+        <div class="logo">
+            <img src="xpertz-logo.png" alt="Xpertz Tutorials">
         </div>
+        <nav>
+            <ul>
+                <li><button class="nav-btn" onclick="scrollToSection('classes')">Classes</button></li>
+                <li><button class="nav-btn" onclick="scrollToSection('notes')">Notes</button></li>
+                <li><button class="nav-btn" onclick="scrollToSection('achievements')">Achievements</button></li>
+                <li><button class="nav-btn" id="darkModeToggle">Dark Mode</button></li>
+            </ul>
+        </nav>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
-            <h1>Learn Smarter with <span>Xpertz</span></h1>
-            <p>Interactive tutorials for Class 3-10. Guaranteed improvement, trusted by parents.</p>
-            <button class="cta-btn scroll-btn" data-target="#classes">Explore Classes</button>
+        <div class="hero-text">
+            <h1>Welcome to Xpertz Tutorials</h1>
+            <p>Learn better. Achieve more. Trusted by hundreds of parents and students.</p>
+            <button class="cta-btn">Get Started</button>
+        </div>
+        <div class="hero-image">
+            <img src="placeholder1.jpg" alt="Learning Illustration">
         </div>
     </section>
 
-    <section id="classes" class="classes-section">
-        <div class="container">
-            <h2>Class 3-8 (All Subjects)</h2>
-            <div class="tiles-carousel">
-                <div class="tile"><img src="assets/placeholder1.jpg" alt=""><h3>Math</h3></div>
-                <div class="tile"><img src="assets/placeholder2.jpg" alt=""><h3>Science</h3></div>
-                <div class="tile"><img src="assets/placeholder3.jpg" alt=""><h3>English</h3></div>
-                <div class="tile"><img src="assets/placeholder1.jpg" alt=""><h3>Social Studies</h3></div>
-                <div class="tile"><img src="assets/placeholder2.jpg" alt=""><h3>Computer</h3></div>
+    <!-- Classes Section -->
+    <section id="classes" class="classes">
+        <h2>Our Classes</h2>
+        <div class="class-grid">
+            <div class="class-card">
+                <h3>Class 3-8 (All Subjects)</h3>
+                <img src="placeholder2.jpg" alt="Class 3-8">
+                <button class="card-btn">Explore</button>
             </div>
-
-            <h2>Class 9-10 (English & Social Studies)</h2>
-            <div class="tiles-carousel">
-                <div class="tile"><img src="assets/placeholder3.jpg" alt=""><h3>English</h3></div>
-                <div class="tile"><img src="assets/placeholder1.jpg" alt=""><h3>Social Studies</h3></div>
-                <div class="tile"><img src="assets/placeholder2.jpg" alt=""><h3>English Literature</h3></div>
-                <div class="tile"><img src="assets/placeholder3.jpg" alt=""><h3>History</h3></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="achievements" class="achievements-section">
-        <div class="container">
-            <h2>Our Achievements</h2>
-            <div class="achievements-cards">
-                <div class="achievement-card">
-                    <h3>Guaranteed Improvement</h3>
-                    <p>We focus on measurable results for every student.</p>
-                </div>
-                <div class="achievement-card">
-                    <h3>Trusted by 250+ Parents</h3>
-                    <p>Our community keeps growing every day.</p>
-                </div>
-                <div class="achievement-card">
-                    <h3>Interactive Learning</h3>
-                    <p>Video, quizzes, and live sessions make learning fun.</p>
-                </div>
+            <div class="class-card">
+                <h3>Class 9-10 (English & Social Science)</h3>
+                <img src="placeholder3.jpg" alt="Class 9-10">
+                <button class="card-btn">Explore</button>
             </div>
         </div>
     </section>
 
-    <section id="notes" class="notes-section">
-        <div class="container">
-            <h2>Notes Section</h2>
-            <p>Coming soon: Downloadable notes and resources for all classes.</p>
+    <!-- Notes Section -->
+    <section id="notes" class="notes">
+        <h2>Notes</h2>
+        <p>Coming soon...</p>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="achievements">
+        <h2>Our Achievements</h2>
+        <div class="achievement-grid">
+            <div class="achievement-card">
+                <h3>Guaranteed Improvement</h3>
+            </div>
+            <div class="achievement-card">
+                <h3>Trusted by over 250 parents</h3>
+            </div>
+            <div class="achievement-card">
+                <h3>Interactive Learning</h3>
+            </div>
         </div>
     </section>
 
+    <!-- Image Carousel -->
+    <section class="carousel-section">
+        <div class="carousel-track">
+            <img src="placeholder1.jpg" alt="Slide 1" class="carousel-slide">
+            <img src="placeholder2.jpg" alt="Slide 2" class="carousel-slide">
+            <img src="placeholder3.jpg" alt="Slide 3" class="carousel-slide">
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <div class="container">
-            <p>&copy; 2025 Xpertz Tutorials. All Rights Reserved.</p>
-        </div>
+        <p>&copy; 2025 Xpertz Tutorials. All rights reserved.</p>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
