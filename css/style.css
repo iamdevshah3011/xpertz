@@ -1,235 +1,57 @@
-/* GENERAL RESET */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+/* RESET */
+* {margin:0; padding:0; box-sizing:border-box;}
+body {font-family:'Inter', sans-serif; background:#f8f8f8; color:#111; transition: background 0.5s, color 0.5s;}
+a {text-decoration:none; color:inherit;}
+ul {list-style:none;}
+button {cursor:pointer; transition: all 0.3s;}
 
-body {
-    line-height: 1.6;
-    background-color: #f8f9fa;
-    color: #222;
-    transition: background-color 0.5s, color 0.5s;
-}
+/* CONTAINERS */
+.container {width:90%; max-width:1200px; margin:0 auto;}
 
-/* DARK MODE */
-body.dark-mode {
-    background-color: #121212;
-    color: #e0e0e0;
-}
+/* HEADER */
+header {background:#fff; padding:1rem 0; box-shadow:0 2px 5px rgba(0,0,0,0.05); position:sticky; top:0; z-index:1000; transition: background 0.5s;}
+header .logo {height:50px;}
+header nav ul {display:flex; gap:1rem; align-items:center;}
+header nav ul li button {background:none; border:none; font-weight:600; padding:0.5rem 1rem; border-radius:5px;}
+header nav ul li button:hover {background:#e0e0e0;}
 
-/* NAVBAR */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 5%;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    transition: background-color 0.5s;
-}
-
-body.dark-mode .navbar {
-    background-color: #1e1e1e;
-}
-
-.navbar .logo img {
-    height: 50px;
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: #222;
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-.nav-links a:hover {
-    color: #007bff;
-}
-
-body.dark-mode .nav-links a {
-    color: #e0e0e0;
-}
-
-/* HERO SECTION */
-.hero {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    min-height: 70vh;
-    background: linear-gradient(135deg, #007bff, #00c6ff);
-    color: #fff;
-    padding: 2rem 5%;
-}
-
-.hero-content h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.hero-content p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-}
-
-.cta-buttons a {
-    text-decoration: none;
-    padding: 0.8rem 1.8rem;
-    margin: 0 0.5rem;
-    border-radius: 5px;
-    transition: 0.3s;
-}
-
-.btn-primary {
-    background-color: #fff;
-    color: #007bff;
-    font-weight: 600;
-}
-
-.btn-primary:hover {
-    background-color: #e6e6e6;
-}
-
-.btn-secondary {
-    background-color: transparent;
-    border: 2px solid #fff;
-    color: #fff;
-}
-
-.btn-secondary:hover {
-    background-color: rgba(255,255,255,0.2);
-}
+/* HERO */
+.hero {height:90vh; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#4f46e5,#3b82f6); color:#fff; text-align:center; transition: background 0.5s;}
+.hero h1 {font-size:3rem; margin-bottom:1rem;}
+.hero h1 span {color:#facc15;}
+.hero p {font-size:1.2rem; margin-bottom:2rem;}
+.cta-btn {background:#facc15; color:#111; border:none; padding:0.8rem 2rem; font-weight:600; border-radius:8px; transition:all 0.3s;}
+.cta-btn:hover {transform:scale(1.05);}
 
 /* CLASSES SECTION */
-.classes-section {
-    padding: 5rem 5%;
-}
+.classes-section {padding:5rem 0; background:#f8f8f8; transition: background 0.5s;}
+.classes-section h2 {font-size:2rem; margin-bottom:2rem; text-align:center;}
+.tiles-carousel {display:flex; gap:1.5rem; overflow-x:auto; scroll-behavior:smooth; padding-bottom:1rem;}
+.tile {min-width:200px; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 5px 15px rgba(0,0,0,0.1); flex-shrink:0; transition: transform 0.3s, box-shadow 0.3s;}
+.tile img {width:100%; height:150px; object-fit:cover;}
+.tile h3 {padding:1rem; text-align:center;}
+.tile:hover {transform:scale(1.05); box-shadow:0 10px 20px rgba(0,0,0,0.15);}
 
-.classes-section h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: 2rem;
-}
+/* ACHIEVEMENTS */
+.achievements-section {padding:5rem 0; background:#fff; transition: background 0.5s;}
+.achievements-section h2 {text-align:center; font-size:2rem; margin-bottom:3rem;}
+.achievements-cards {display:flex; flex-wrap:wrap; gap:2rem; justify-content:center;}
+.achievement-card {flex:1 1 250px; background:#4f46e5; color:#fff; padding:2rem; border-radius:12px; text-align:center; transition: transform 0.3s, box-shadow 0.3s;}
+.achievement-card:hover {transform:translateY(-10px); box-shadow:0 10px 25px rgba(0,0,0,0.2);}
 
-.tiles-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
-}
-
-.tile {
-    background-color: #fff;
-    border-radius: 10px;
-    width: 250px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    text-align: center;
-    padding: 1rem;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-body.dark-mode .tile {
-    background-color: #1f1f1f;
-    box-shadow: 0 5px 15px rgba(255,255,255,0.05);
-}
-
-.tile:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-}
-
-.tile img {
-    width: 100%;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-}
-
-.tile h3 {
-    margin-bottom: 0.8rem;
-}
-
-.btn-tile {
-    padding: 0.5rem 1rem;
-    border: none;
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.btn-tile:hover {
-    background-color: #0056b3;
-}
-
-/* NOTES SECTION */
-.notes-section {
-    padding: 5rem 5%;
-    text-align: center;
-    background-color: #f1f1f1;
-}
-
-body.dark-mode .notes-section {
-    background-color: #181818;
-}
-
-/* ACHIEVEMENTS SECTION */
-.achievements-section {
-    padding: 5rem 5%;
-    text-align: center;
-}
-
-.achievement-tiles {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.achievement-tile {
-    background-color: #007bff;
-    color: #fff;
-    padding: 2rem;
-    border-radius: 15px;
-    width: 250px;
-    transition: transform 0.3s, background-color 0.3s;
-}
-
-.achievement-tile:hover {
-    transform: translateY(-5px);
-    background-color: #0056b3;
-}
-
-body.dark-mode .achievement-tile {
-    background-color: #1a73e8;
-}
+/* NOTES */
+.notes-section {padding:5rem 0; text-align:center;}
+.notes-section h2 {font-size:2rem; margin-bottom:1rem;}
 
 /* FOOTER */
-footer {
-    padding: 2rem 5%;
-    text-align: center;
-    background-color: #222;
-    color: #fff;
-}
+footer {padding:2rem 0; text-align:center; background:#111; color:#fff;}
 
-/* RESPONSIVE */
-@media(max-width:768px){
-    .tiles-container, .achievement-tiles {
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
+/* DARK MODE */
+body.dark-mode {background:#111; color:#f0f0f0;}
+body.dark-mode header {background:#222;}
+body.dark-mode .hero {background:linear-gradient(135deg,#111827,#1e3a8a);}
+body.dark-mode .classes-section {background:#1e1e1e;}
+body.dark-mode .tile {background:#222; color:#f0f0f0;}
+body.dark-mode .achievements-section {background:#111;}
+body.dark-mode .achievement-card {background:#3b82f6;}
+body.dark-mode footer {background:#000;}
