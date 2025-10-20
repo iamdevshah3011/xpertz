@@ -1,92 +1,591 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xpertz Tutorials - Study Notes & Guides</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Xpertz Tutorials — Home</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================
+       Color palette (logo-friendly)
+       ========================= */
+    :root{
+      --navy:#0f2834;        /* deep navy background */
+      --navy-2:#0b1f26;
+      --cream:#f3ebdf;       /* light cream for type/accents */
+      --muted:#b7c0c6;
+      --accent:#d6b76a;      /* subtle warm accent (gold-like) */
+      --glass: rgba(255,255,255,0.06);
+      --shadow: 0 8px 30px rgba(2,8,12,0.55);
+      --radius:12px;
+      --ease:cubic-bezier(.2,.9,.2,1);
+    }
+
+    /* =========================
+       Basic reset + utilities
+       ========================= */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Inter',system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      background:linear-gradient(180deg,var(--navy) 0%, #07161a 100%);
+      color:var(--cream);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      -webkit-tap-highlight-color: transparent;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* =========================
+       Top nav
+       ========================= */
+    .container{max-width:1200px;margin:0 auto;padding:0 24px}
+    header{
+      position:sticky;top:12px;z-index:40;
+      backdrop-filter: blur(6px);
+      padding:10px 0;
+    }
+    .nav-wrap{
+      display:flex;align-items:center;justify-content:space-between;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:20px;padding:10px 18px;box-shadow:var(--shadow);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .brand{
+      display:flex;gap:12px;align-items:center;
+    }
+    /* Inline SVG logo mark */
+    .logo{
+      width:56px;height:56px;flex-shrink:0;
+      background:linear-gradient(180deg,var(--cream), #efe6d8);
+      border-radius:12px;
+      display:grid;place-items:center;
+      box-shadow: 0 6px 18px rgba(2,8,12,0.6);
+    }
+    .logo svg{width:38px;height:38px;display:block}
+    .brand h1{margin:0;font-family:'Playfair Display',serif;font-weight:700;font-size:20px;letter-spacing:0.6px;color:var(--cream)}
+    .brand p{margin:0;font-size:11px;color:var(--muted);margin-top:2px}
+
+    .nav{
+      display:flex;gap:14px;align-items:center;
+    }
+    .nav > .nav-item{position:relative}
+    .nav-link{
+      padding:8px 12px;border-radius:10px;display:inline-block;font-weight:600;
+      transition:all .28s var(--ease);color:var(--cream);font-size:15px;
+    }
+    .nav-link:hover{transform:translateY(-3px);background:var(--glass)}
+    .cta{
+      background:var(--accent);color:#081018;padding:10px 14px;border-radius:12px;font-weight:700;
+      box-shadow: 0 8px 24px rgba(214,183,106,0.18);
+      transition:transform .2s var(--ease),box-shadow .2s var(--ease);
+    }
+    .cta:hover{transform:translateY(-3px);box-shadow: 0 14px 36px rgba(214,183,106,0.22)}
+    /* Dropdown */
+    .dropdown{
+      position:absolute;left:0;top:calc(100% + 12px);
+      min-width:220px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+      border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 10px 30px rgba(2,8,12,0.6);opacity:0;transform:translateY(8px) scale(.98);
+      pointer-events:none;transition:opacity .22s var(--ease),transform .22s var(--ease);
+      backdrop-filter: blur(8px);
+    }
+    .dropdown.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+    .dropdown a{display:block;padding:8px 10px;border-radius:8px;color:var(--cream)}
+    .dropdown a:hover{background:rgba(255,255,255,0.03)}
+
+    /* Mobile */
+    .mobile-toggle{display:none;background:transparent;border:0;color:var(--cream)}
+    @media (max-width:880px){
+      .nav{display:none}
+      .mobile-toggle{display:inline-flex;align-items:center;gap:8px}
+      .nav-wrap{padding:12px}
+    }
+
+    /* =========================
+       Hero
+       ========================= */
+    .hero{
+      display:grid;grid-template-columns:1.02fr .9fr;gap:36px;align-items:center;
+      padding:64px 0 32px;
+    }
+    .hero-left{padding:28px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.02)}
+    .eyebrow{display:inline-block;background:rgba(214,183,106,0.12);color:var(--accent);padding:6px 10px;border-radius:999px;font-weight:700;font-size:13px;margin-bottom:18px}
+    .hero h2{font-family:'Playfair Display',serif;font-size:42px;margin:0 0 14px;line-height:1.02;color:var(--cream)}
+    .hero p.lead{color:var(--muted);font-size:16px;margin:0 0 22px}
+    .hero .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{padding:12px 16px;border-radius:10px;font-weight:700;border:0;cursor:pointer}
+    .btn-primary{background:var(--accent);color:#081018}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--cream)}
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+    .feature{
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));
+      border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.02);font-size:14px
+    }
+
+    /* Hero right: carousel / showcase */
+    .showcase{
+      height:420px;border-radius:18px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,0.02);
+      background:linear-gradient(180deg, rgba(2,8,12,0.18), rgba(2,8,12,0.28));
+      display:flex;align-items:center;justify-content:center;
+    }
+    .carousel{
+      width:100%;height:100%;position:relative;
+    }
+    .slide{
+      position:absolute;inset:0;display:grid;place-items:center;padding:24px;
+      transition:transform .8s var(--ease),opacity .6s var(--ease);
+      opacity:0;transform:translateY(18px) scale(.98);
+    }
+    .slide.show{opacity:1;transform:translateY(0) scale(1)}
+    .slide .card{
+      width:92%;height:84%;border-radius:14px;padding:22px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);
+      display:flex;flex-direction:column;gap:12px;align-items:flex-start;justify-content:center;
+    }
+    .card h3{margin:0;font-size:20px;color:var(--cream);font-weight:700}
+    .card p{margin:0;color:var(--muted)}
+
+    .dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
+    .dot{width:10px;height:10px;border-radius:10px;background:rgba(255,255,255,0.06);cursor:pointer}
+    .dot.active{background:var(--accent);box-shadow:0 8px 20px rgba(214,183,106,0.18)}
+
+    /* =========================
+       Course grid + CTA
+       ========================= */
+    section.courses{padding:42px 0}
+    .grid{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+    }
+    .course{
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));
+      border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.02);
+      transition:transform .28s var(--ease),box-shadow .28s var(--ease);
+    }
+    .course:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(2,8,12,0.6)}
+    .course h4{margin:0 0 8px;font-size:18px}
+    .course p{margin:0;color:var(--muted);font-size:14px}
+    .tags{display:flex;gap:8px;margin-top:12px}
+    .tag{font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted)}
+
+    /* =========================
+       Footer & contact
+       ========================= */
+    footer{padding:36px 0;border-top:1px solid rgba(255,255,255,0.02);margin-top:36px}
+    .footer-grid{display:flex;gap:24px;align-items:flex-start}
+    .contact-card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.02);width:360px}
+    .socials{display:flex;gap:10px;margin-top:12px}
+    .socials a{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,0.02)}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* =========================
+       Utilities & responsiveness
+       ========================= */
+    @media (max-width:1100px){
+      .hero{grid-template-columns:1fr;gap:20px}
+      .showcase{height:360px}
+      .grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:640px){
+      .container{padding:0 16px}
+      .logo{width:48px;height:48px}
+      .brand h1{font-size:16px}
+      .hero h2{font-size:30px}
+      .features{grid-template-columns:repeat(2,1fr)}
+      .grid{grid-template-columns:1fr}
+      header{position:relative;top:8px}
+      .showcase{height:260px}
+    }
+
+    /* small reveal animations */
+    .reveal{opacity:0;transform:translateY(12px);transition:all .9s var(--ease)}
+    .reveal.show{opacity:1;transform:none}
+  </style>
 </head>
 <body>
-
-    <header class="header">
-        <div class="logo">Xpertz Tutorials</div>
-        <nav class="nav">
-            <a href="index.html" class="nav-link active">Home</a>
-            
-            <!-- MEGA-MENU DROP-DOWN (Updated for all files) -->
-            <div class="dropdown">
-                <button class="nav-link dropdown-toggle">Study Notes</button>
-                <div class="dropdown-menu">
-                    
-                    <div class="menu-column">
-                        <h4>Foundation (Classes 3-8)</h4>
-                        <a href="notes/class3.html">Class 3 Notes</a>
-                        <a href="notes/class4.html">Class 4 Notes</a>
-                        <a href="notes/class5.html">Class 5 Notes</a>
-                        <a href="notes/class6.html">Class 6 Notes</a>
-                        <a href="notes/class7.html">Class 7 Notes</a>
-                        <a href="notes/class8.html">Class 8 Notes</a>
-                    </div>
-
-                    <div class="menu-column">
-                        <h4>Secondary (Classes 9-10)</h4>
-                        <a href="notes/class9-english.html">Class 9 English</a>
-                        <a href="notes/class9-ss.html">Class 9 Social Science</a>
-                        <a href="notes/class10-english.html">Class 10 English</a>
-                        <a href="notes/class10-ss.html">Class 10 Social Science</a>
-                    </div>
-                </div>
-            </div>
-            
-            <a href="about.html" class="nav-link">About Us</a>
-            <a href="contact.html" class="nav-link">Contact</a>
-        </nav>
-    </header>
-
-    <!-- NEW: Dynamic Hero Section for visual interest and smoothness -->
-    <section class="hero-section">
-        <div class="hero-content">
-            <h1>Unlock Clarity in Learning</h1>
-            <p>Simplified notes and guides for K-10 students from Xpertz Tutorials. Clean structure. Core focus.</p>
-            <a href="notes/class8.html" class="cta-button">Start Learning Now &rarr;</a>
+  <header>
+    <div class="container">
+      <div class="nav-wrap" role="navigation" aria-label="Main navigation">
+        <div class="brand" aria-hidden="false">
+          <div class="logo" aria-hidden="true">
+            <!-- Inline bespoke SVG mark combining X + lightbulb / book -->
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#efe6d8"/></linearGradient></defs>
+              <rect x="0" y="0" width="64" height="64" rx="12" fill="none"/>
+              <g transform="translate(6,6)">
+                <!-- bulb outline -->
+                <path d="M26 0C20 0 14 5 14 11c0 3 1 5 2.5 7.2 1.2 1.6 1.7 3.6 1.7 5.8v2.5c0 1.6 1.3 2.9 2.9 2.9h9c1.6 0 2.9-1.3 2.9-2.9V24c0-2.2.5-4.2 1.7-5.8C45 16 46 14 46 11 46 5 40 0 34 0H26z" fill="#0f2834"/>
+                <!-- X inside -->
+                <g transform="translate(4,4)" fill="url(#g)">
+                  <path d="M14 6 L18 10 L22 6 L26 10 L22 14 L26 18 L22 22 L18 18 L14 22 L10 18 L14 14 L10 10 Z"/>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div>
+            <h1>Xpertz Tutorials</h1>
+            <p>Learn. Master. Excel.</p>
+          </div>
         </div>
+
+        <nav class="nav" aria-label="Primary">
+          <div class="nav-item">
+            <button class="nav-link" data-dd="courses" aria-expanded="false">Courses ▾</button>
+            <div class="dropdown" id="dd-courses" role="menu" aria-hidden="true">
+              <a href="#courses" role="menuitem">All Courses</a>
+              <a href="#courses" role="menuitem">STEM Foundations</a>
+              <a href="#courses" role="menuitem">English & Humanities</a>
+              <a href="#courses" role="menuitem">Competitive Prep</a>
+            </div>
+          </div>
+
+          <div class="nav-item">
+            <button class="nav-link" data-dd="notes" aria-expanded="false">Notes ▾</button>
+            <div class="dropdown" id="dd-notes" role="menu" aria-hidden="true">
+              <a href="#notes" role="menuitem">Class Notes</a>
+              <a href="#notes" role="menuitem">Revision Sheets</a>
+              <a href="#notes" role="menuitem">Download Center</a>
+            </div>
+          </div>
+
+          <div class="nav-item">
+            <button class="nav-link" data-dd="class38" aria-expanded="false">Class 3–8 ▾</button>
+            <div class="dropdown" id="dd-class38" role="menu" aria-hidden="true">
+              <a href="#class38" role="menuitem">Primary Math</a>
+              <a href="#class38" role="menuitem">Science Explorers</a>
+              <a href="#class38" role="menuitem">English Basics</a>
+            </div>
+          </div>
+
+          <div class="nav-item">
+            <button class="nav-link" data-dd="class910" aria-expanded="false">Class 9–10 ▾</button>
+            <div class="dropdown" id="dd-class910" role="menu" aria-hidden="true">
+              <a href="#class910" role="menuitem">Mathematics</a>
+              <a href="#class910" role="menuitem">Physics & Chemistry</a>
+              <a href="#class910" role="menuitem">Languages</a>
+            </div>
+          </div>
+
+          <a class="nav-link" href="#about">About</a>
+          <a class="nav-link" href="#contact">Contact</a>
+
+          <a class="cta nav-link" href="#enroll">Enroll</a>
+        </nav>
+
+        <button class="mobile-toggle" aria-label="Open menu" id="mobileBtn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" id="top">
+    <!-- HERO -->
+    <section class="hero" aria-label="Intro">
+      <div class="hero-left reveal">
+        <span class="eyebrow">New — curated learning paths</span>
+        <h2>Master concepts. Build confidence. Stand out.</h2>
+        <p class="lead">Xpertz Tutorials combines proven teaching patterns with focused practice. Designed for classes 3–10 with expert instructors and crisp notes that actually stick.</p>
+
+        <div class="actions">
+          <button class="btn btn-primary" onclick="location.href='#courses'">Browse Courses</button>
+          <button class="btn btn-ghost" onclick="location.href='#notes'">Get Notes</button>
+          <button class="btn" style="background:transparent;color:var(--muted);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);">Watch Intro</button>
+        </div>
+
+        <div class="features" style="margin-top:20px">
+          <div class="feature">
+            <strong>Expert Tutors</strong>
+            <div class="small">Experienced teachers + pedagogical design.</div>
+          </div>
+          <div class="feature">
+            <strong>Short lessons</strong>
+            <div class="small">Bite-sized videos & notes for everyday progress.</div>
+          </div>
+          <div class="feature">
+            <strong>Practice-driven</strong>
+            <div class="small">Worked examples, quizzes and downloadable notes.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="showcase reveal" aria-hidden="false">
+        <div class="carousel" id="carousel">
+          <div class="slide show" data-index="0">
+            <div class="card">
+              <h3>Interactive Lessons</h3>
+              <p>Short, focused modules with checkpoints that build mastery quickly.</p>
+            </div>
+          </div>
+          <div class="slide" data-index="1">
+            <div class="card">
+              <h3>Clear Notes</h3>
+              <p>High-quality revision notes, condensed for fast review and recall.</p>
+            </div>
+          </div>
+          <div class="slide" data-index="2">
+            <div class="card">
+              <h3>Regular Tests</h3>
+              <p>Periodic assessments and instant feedback to track progress.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dots" id="dots">
+          <div class="dot active" data-target="0"></div>
+          <div class="dot" data-target="1"></div>
+          <div class="dot" data-target="2"></div>
+        </div>
+      </div>
     </section>
 
-    <main class="main-content">
-        <!-- Feature Rich Section (Minimalist Tiles) - Now much smoother -->
-        <section class="feature-grid">
-            <div class="feature-tile">
-                <div class="icon-placeholder">&hearts;</div>
-                <h3>Focused Foundation</h3>
-                <p>Comprehensive coverage for all core subjects in Classes 3 through 8.</p>
-            </div>
-            <div class="feature-tile">
-                <div class="icon-placeholder">&spades;</div>
-                <h3>Secondary Focus</h3>
-                <p>Deep-dive study notes specifically tailored for Class 9 and 10 English and Social Science.</p>
-            </div>
-            <div class="feature-tile">
-                <div class="icon-placeholder">&clubs;</div>
-                <h3>Sleek & Simple</h3>
-                <p>Minimalist design ensures zero distraction, allowing maximum focus on content.</p>
-            </div>
-        </section>
+    <!-- Courses preview -->
+    <section id="courses" class="courses reveal" aria-label="Courses">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+        <div>
+          <h3 style="margin:0;font-family:'Playfair Display',serif;">Featured Courses</h3>
+          <div class="small" style="margin-top:6px;color:var(--muted)">Programs for every learner — from basics to competitive prep.</div>
+        </div>
+        <div>
+          <a class="btn btn-ghost" href="#courses">View Catalog</a>
+        </div>
+      </div>
 
-        <section class="callout-section">
-            <h2>Ready to dive into your next subject?</h2>
-            <a href="#" class="cta-button secondary-cta">Explore All Notes</a>
-        </section>
-    </main>
+      <div class="grid">
+        <article class="course">
+          <h4>Foundations — Mathematics (Class 3–5)</h4>
+          <p>Playful approach to fundamentals: arithmetic, shapes, and problem-solving.</p>
+          <div class="tags">
+            <span class="tag">Class 3–5</span><span class="tag">Interactive</span><span class="tag">Short lessons</span>
+          </div>
+        </article>
 
-    <footer class="footer">
-        <p>&copy; 2025 Xpertz Tutorials. All rights reserved.</p>
+        <article class="course">
+          <h4>Science Explorers (Class 6–8)</h4>
+          <p>Concept-first lessons with experiments, diagrams, and clear notes.</p>
+          <div class="tags">
+            <span class="tag">Class 6–8</span><span class="tag">Hands-on</span><span class="tag">Notes</span>
+          </div>
+        </article>
+
+        <article class="course">
+          <h4>Mathematics Mastery (Class 9–10)</h4>
+          <p>Problem strategies, exam-style practice and concise formula sheets.</p>
+          <div class="tags">
+            <span class="tag">Class 9–10</span><span class="tag">Exam prep</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Notes preview -->
+    <section id="notes" class="reveal" style="margin-top:30px">
+      <div style="display:flex;gap:18px;align-items:center;justify-content:space-between">
+        <div style="max-width:68%">
+          <h3 style="margin:0;font-family:'Playfair Display',serif">Notes & Revision Sheets</h3>
+          <p class="small" style="margin-top:8px;color:var(--muted)">Download crisp, printable revision sheets made for quick review before tests and exams.</p>
+        </div>
+        <div>
+          <a class="btn btn-primary" href="#notes">Download Sample</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="reveal" style="margin-top:34px;padding-bottom:8px">
+      <div style="display:flex;gap:18px;align-items:flex-start">
+        <div style="flex:1">
+          <h3 style="font-family:'Playfair Display',serif;margin-top:0">About Xpertz Tutorials</h3>
+          <p class="small" style="color:var(--muted)">Xpertz Tutorials exists to make learning effective and efficient: short lessons, expert-led modules, and a focus on durable understanding. We design materials for busy students and supportive parents alike.</p>
+          <ul style="color:var(--muted);margin-top:12px">
+            <li>Structured learning paths</li>
+            <li>Quality notes & assessments</li>
+            <li>Friendly pricing and trial lessons</li>
+          </ul>
+        </div>
+
+        <aside style="width:320px">
+          <div style="background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)">
+            <h4 style="margin:0">Our Promise</h4>
+            <p class="small" style="color:var(--muted);margin-top:8px">Clear goals, measurable progress, and a supportive learning environment for every child.</p>
+            <a class="btn btn-ghost" href="#contact" style="margin-top:12px;display:inline-block">Contact us</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="reveal" style="margin-top:36px;">
+      <div style="display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap">
+        <div style="flex:1;min-width:300px">
+          <h3 style="font-family:'Playfair Display',serif;margin-top:0">Get in touch</h3>
+          <p class="small" style="color:var(--muted)">Have a question or want a demo class? Send us a message — we reply within 24 hours on weekdays.</p>
+
+          <form id="contactForm" style="margin-top:14px;display:flex;flex-direction:column;gap:10px">
+            <input name="name" required placeholder="Full name" style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--cream);outline:none" />
+            <input name="email" required placeholder="Email address" style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--cream);outline:none" />
+            <textarea name="message" required rows="4" placeholder="How can we help?" style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--cream);outline:none"></textarea>
+            <div style="display:flex;gap:10px">
+              <button class="btn btn-primary" type="submit">Send message</button>
+              <button class="btn btn-ghost" type="button" onclick="location.href='#enroll'">Enroll</button>
+            </div>
+            <div id="formMsg" class="small" style="color:var(--muted);margin-top:6px"></div>
+          </form>
+        </div>
+
+        <div style="width:320px">
+          <div class="contact-card">
+            <strong>Contact</strong>
+            <div class="small" style="margin-top:8px;color:var(--muted)">Email: hello@xpertztutorials.com</div>
+            <div class="small">Phone: +91 98765 43210</div>
+            <div style="margin-top:12px">
+              <strong>Office</strong>
+              <div class="small" style="color:var(--muted)">Mumbai, India</div>
+            </div>
+
+            <div class="socials" aria-hidden="true">
+              <a href="#" title="Twitter" aria-label="Twitter">T</a>
+              <a href="#" title="Instagram" aria-label="Instagram">I</a>
+              <a href="#" title="YouTube" aria-label="YouTube">Y</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="reveal" style="margin-top:34px">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+        <div class="small">© <strong>Xpertz Tutorials</strong> — 2025. All rights reserved.</div>
+        <div class="small">Privacy · Terms · Sitemap</div>
+      </div>
     </footer>
+  </main>
 
-    <!-- Simple JavaScript for mobile menu toggle (Interactivity feature) -->
-    <script>
-        // Simple mobile menu toggle functionality (not included in the initial HTML for simplicity)
-        // If you want a mobile menu icon, you would need to add a small JS snippet here
-    </script>
+  <!-- Mobile menu panel -->
+  <div id="mobileMenu" style="display:none;position:fixed;inset:0;background:linear-gradient(180deg, rgba(2,6,10,0.7), rgba(2,6,10,0.85));z-index:60;padding:26px;overflow:auto">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <div style="display:flex;gap:12px;align-items:center">
+        <div style="width:44px;height:44px;border-radius:10px;background:var(--cream)"></div>
+        <div>
+          <div style="font-weight:800">Xpertz Tutorials</div>
+          <div style="font-size:12px;color:var(--muted)">Learn. Master. Excel.</div>
+        </div>
+      </div>
+      <button class="mobile-toggle" id="mobileClose" aria-label="Close menu">&times;</button>
+    </div>
 
+    <nav style="display:flex;flex-direction:column;gap:12px">
+      <a class="nav-link" href="#courses" onclick="toggleMobile()">Courses</a>
+      <a class="nav-link" href="#notes" onclick="toggleMobile()">Notes</a>
+      <a class="nav-link" href="#class38" onclick="toggleMobile()">Class 3–8</a>
+      <a class="nav-link" href="#class910" onclick="toggleMobile()">Class 9–10</a>
+      <a class="nav-link" href="#about" onclick="toggleMobile()">About</a>
+      <a class="nav-link" href="#contact" onclick="toggleMobile()">Contact</a>
+      <a class="nav-link cta" href="#enroll" onclick="toggleMobile()">Enroll</a>
+    </nav>
+  </div>
+
+  <script>
+    /* ====== Dropdowns ====== */
+    const ddButtons = document.querySelectorAll('[data-dd]');
+    ddButtons.forEach(btn=>{
+      const key = btn.dataset.dd;
+      const panel = document.getElementById('dd-' + key);
+      btn.addEventListener('click', (e)=>{
+        const showing = panel.classList.contains('show');
+        // hide any other open
+        document.querySelectorAll('.dropdown').forEach(d=>{d.classList.remove('show');d.setAttribute('aria-hidden','true')});
+        ddButtons.forEach(b=>b.setAttribute('aria-expanded','false'));
+        if(!showing){
+          panel.classList.add('show');
+          panel.setAttribute('aria-hidden','false');
+          btn.setAttribute('aria-expanded','true');
+        } else {
+          panel.classList.remove('show');
+          panel.setAttribute('aria-hidden','true');
+          btn.setAttribute('aria-expanded','false');
+        }
+      });
+    });
+    // close on outside click
+    document.addEventListener('click', (e)=>{
+      if(!e.target.closest('.nav-item')) {
+        document.querySelectorAll('.dropdown').forEach(d=>{d.classList.remove('show');d.setAttribute('aria-hidden','true')});
+        ddButtons.forEach(b=>b.setAttribute('aria-expanded','false'));
+      }
+    });
+
+    /* ====== Simple carousel ====== */
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    let idx = 0;
+    function showSlide(i){
+      slides.forEach(s=>s.classList.remove('show'));
+      dots.forEach(d=>d.classList.remove('active'));
+      slides[i].classList.add('show');
+      dots[i].classList.add('active');
+    }
+    dots.forEach(d=>{
+      d.addEventListener('click', ()=>{ idx = Number(d.dataset.target); showSlide(idx); });
+    });
+    setInterval(()=>{
+      idx = (idx + 1) % slides.length;
+      showSlide(idx);
+    }, 5000);
+
+    /* ====== Mobile menu ====== */
+    const mobileBtn = document.getElementById('mobileBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileClose = document.getElementById('mobileClose');
+    function toggleMobile(open = true){
+      if(open){
+        mobileMenu.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      } else {
+        mobileMenu.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    }
+    mobileBtn.addEventListener('click', ()=>toggleMobile(true));
+    mobileClose.addEventListener('click', ()=>toggleMobile(false));
+
+    /* ====== Form (demo only) ====== */
+    const contactForm = document.getElementById('contactForm');
+    const formMsg = document.getElementById('formMsg');
+    contactForm.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      formMsg.textContent = 'Sending...';
+      // demo fake send
+      setTimeout(()=>{
+        formMsg.style.color = 'var(--accent)';
+        formMsg.textContent = 'Thanks! We received your message. We will get back soon.';
+        contactForm.reset();
+      }, 900);
+    });
+
+    /* ====== reveal on scroll ====== */
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+        }
+      });
+    }, {threshold:0.12});
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+    /* ====== small a11y note: close dropdown with Esc ====== */
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape'){
+        document.querySelectorAll('.dropdown').forEach(d=>{d.classList.remove('show')});
+        toggleMobile(false);
+      }
+    });
+  </script>
 </body>
 </html>
+
