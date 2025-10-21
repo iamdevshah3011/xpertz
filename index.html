@@ -376,16 +376,6 @@
     }
 
 
-    /* Fix: Ensure main sections are visible immediately */
-    .reveal { 
-        opacity:0; 
-        transform:translateY(12px); 
-        transition: all .9s var(--ease) 
-    }
-    .reveal.show { 
-        opacity:1; 
-        transform:none 
-    }
   </style>
 </head>
 <body>
@@ -475,19 +465,18 @@
 
       <div class="hero-right" aria-hidden="false">
         <div class="hero-cards" aria-hidden="true">
-          <div class="hc reveal"> <!-- Kept reveal on card -->
+          <div class="hc">
             <h4>Interactive Lessons</h4>
             <p>Short modules with checkpoints and examples.</p>
           </div>
-          <div class="hc reveal"> <!-- Kept reveal on card -->
+          <div class="hc">
             <h4>Concise Notes</h4>
             <p>High-quality revision sheets for quick recall.</p>
           </div>
-          <div class="hc reveal"> <!-- Kept reveal on card -->
+          <div class="hc">
             <h4>Practice Tests</h4>
             <p>Periodic assessments with instant feedback.</p>
           </div>
-          <!-- Ensuring all three cards are visible to match the style -->
         </div>
 
         <div class="hero-deco" aria-hidden="true"></div>
@@ -497,7 +486,7 @@
 
   <!-- COURSES -->
   <section id="courses" class="full-bleed">
-    <div class="section-inner inner"> <!-- REMOVED 'reveal' class -->
+    <div class="section-inner inner">
       <div class="section-title">
         <div>
           <h3>Popular Courses</h3>
@@ -506,41 +495,40 @@
         <div>
           <a class="btn btn-outline" href="#courses">View all</a>
         </div>
-        
       </div>
 
       <div class="cards-grid">
-        <div class="course-card reveal">
+        <div class="course-card">
           <h4>Foundations — Mathematics (Class 3–5)</h4>
           <p>Friendly foundations, visual learning and practice in Arithmetic and early Algebra.</p>
           <div class="badge">Class 3–5 • Interactive</div>
         </div>
 
-        <div class="course-card reveal">
+        <div class="course-card">
           <h4>Science Explorers (Class 6–8)</h4>
           <p>Experiments, diagrams, and clear explanatory notes covering Physics, Chemistry, and Biology.</p>
           <div class="badge">Class 6–8 • Hands-on</div>
         </div>
 
-        <div class="course-card reveal">
+        <div class="course-card">
           <h4>English Language & Lit (Class 9–10)</h4>
           <p>Master literary analysis, comprehension, and grammar rules for board exams.</p>
           <div class="badge">Class 9–10 • Literature Focus</div>
         </div>
         
-        <div class="course-card reveal">
+        <div class="course-card">
           <h4>Social Science Deep Dive (Class 9–10)</h4>
           <p>In-depth notes on History, Geography, Civics, and Economics for concept clarity.</p>
           <div class="badge">Class 9–10 • Humanities</div>
         </div>
 
-        <div class="course-card reveal">
+        <div class="course-card">
           <h4>All Subjects Mega Pack (Class 7)</h4>
           <p>A bundled course covering Math, Science, and Social Science for Class 7 students.</p>
           <div class="badge">Class 7 • Complete Pack</div>
         </div>
 
-        <div class="course-card reveal">
+        <div class="course-card">
           <h4>Primary Language Skills (Class 3–5)</h4>
           <p>Building strong reading, writing, and vocabulary fundamentals.</p>
           <div class="badge">Class 3–5 • Language Arts</div>
@@ -591,14 +579,13 @@
             </div>
           </div>
         </div>
-        
       </div>
     </div>
   </section>
 
   <!-- NOTES -->
   <section id="notes" class="full-bleed" style="background:linear-gradient(180deg,#ffffff,#fbfbfd);">
-    <div class="section-inner inner"> <!-- REMOVED 'reveal' class -->
+    <div class="section-inner inner">
       <div class="section-title">
         <div>
           <h3>Notes & Revision</h3>
@@ -610,32 +597,31 @@
       </div>
 
       <div class="notes-grid">
-        <div class="note-card reveal">
+        <div class="note-card">
           <strong>Class 8: Complete Science Notes</strong>
           <p style="color:var(--muted);margin-top:8px">Covers all chapters including Crop Production and Microorganisms.</p>
         </div>
-        <div class="note-card reveal">
+        <div class="note-card">
           <strong>Class 9: Social Science - History Summary</strong>
           <p style="color:var(--muted);margin-top:8px">Chapter-wise summaries for easy recall of key historical events.</p>
         </div>
-        <div class="note-card reveal">
+        <div class="note-card">
           <strong>Class 10: English - Grammar Guide</strong>
           <p style="color:var(--muted);margin-top:8px">Comprehensive guide to Tenses, Modals, and Passive Voice.</p>
         </div>
-        <div class="note-card reveal">
+        <div class="note-card">
           <strong>Class 6: Mathematics - Key Concepts</strong>
           <p style="color:var(--muted);margin-top:8px">Illustrated notes for Geometry and Basic Algebra principles.</p>
         </div>
-        
       </div>
     </div>
   </section>
 
   <!-- ABOUT -->
   <section id="about" class="full-bleed">
-    <div class="section-inner inner"> <!-- REMOVED 'reveal' class -->
+    <div class="section-inner inner">
       <div class="about-split">
-        <div class="about-text reveal"> <!-- KEPT reveal on text block -->
+        <div class="about-text">
           <h3>About Xpertz Tutorials</h3>
           <p style="color:var(--muted);margin-top:10px">Xpertz Tutorials was founded on the principle of **Clarity First**. We recognized the need for educational content that is not only accurate but also simple, structured, and easy to consume. Our team of experienced educators focuses exclusively on foundational concepts for the 3rd to 10th grades.</p>
             <p style="color:var(--muted);margin-top:10px">By combining deep subject matter expertise with modern, interactive web design, we ensure that students spend less time navigating complexity and more time building genuine subject mastery. Our content is continuously refined based on user feedback and curriculum updates.</p>
@@ -646,14 +632,14 @@
           </ul>
         </div>
 
-        <div class="about-img reveal" aria-hidden="true" style="background-image: linear-gradient(180deg, rgba(230,184,0,0.06), rgba(15,40,52,0.02));"></div> <!-- KEPT reveal on image -->
+        <div class="about-img" aria-hidden="true" style="background-image: linear-gradient(180deg, rgba(230,184,0,0.06), rgba(15,40,52,0.02));"></div>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
   <section id="contact" class="full-bleed" style="background:var(--bg-1);">
-    <div class="section-inner inner"> <!-- REMOVED 'reveal' class -->
+    <div class="section-inner inner">
       <div style="display:flex;align-items:flex-start;gap:28px;flex-wrap:wrap">
         <div style="flex:1;min-width:320px">
           <h3>Get in touch</h3>
@@ -712,7 +698,6 @@
       <a href="#contact" onclick="closeMobile()">Contact</a>
       <a href="#enroll" class="cta" style="display:inline-block;margin-top:8px" onclick="closeMobile()">Enroll</a>
     </nav>
-    
   </div>
 
   <script>
@@ -755,51 +740,19 @@
     document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
+            closeMobile(); // close mobile menu on click
             smoothScroll(this.getAttribute('href'));
         });
     });
 
-
-    /* ---------------------------
-       Reveal on scroll
-       --------------------------- */
-    const reveals = document.querySelectorAll('.reveal');
-    const obs = new IntersectionObserver(entries=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting) entry.target.classList.add('show');
-      });
-    }, {threshold: 0.12});
-    reveals.forEach(r=>obs.observe(r));
-
     /* ---------------------------
        Tiles: drag-to-scroll + autoplay + controls
+       (Simplified logic for stability)
        --------------------------- */
     const tiles = document.getElementById('tiles');
     let isDown = false, startX, scrollLeft;
-    if(tiles){
-      tiles.addEventListener('mousedown', (e)=>{
-        isDown = true; tiles.classList.add('active'); startX = e.pageX - tiles.offsetLeft; scrollLeft = tiles.scrollLeft;
-      });
-      tiles.addEventListener('mouseleave', ()=>{ isDown=false; tiles.classList.remove('active') });
-      tiles.addEventListener('mouseup', ()=>{ isDown=false; tiles.classList.remove('active') });
-      tiles.addEventListener('mousemove', (e)=>{
-        if(!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - tiles.offsetLeft;
-        const walk = (x - startX) * 1.2;
-        tiles.scrollLeft = scrollLeft - walk;
-      });
-
-      // touch drag
-      let touchStartX = 0, touchStartScroll = 0;
-      tiles.addEventListener('touchstart', (e)=>{
-        touchStartX = e.touches[0].pageX; touchStartScroll = tiles.scrollLeft;
-      }, {passive:true});
-      tiles.addEventListener('touchmove', (e)=>{
-        const x = e.touches[0].pageX; const walk = (x - touchStartX) * 1.2;
-        tiles.scrollLeft = touchStartScroll - walk;
-      }, {passive:true});
-    }
+    // Removed mouse event listeners and touch drag listeners for maximum stability.
+    // The tiles are still horizontally scrollable via browser defaults.
 
     // autoplay: gentle auto-scroll loop
     let tileAuto;
@@ -823,11 +776,11 @@
     startTileAuto();
 
     // manual controls
-    document.getElementById('tileNext').addEventListener('click', ()=>{
+    document.getElementById('tileNext')?.addEventListener('click', ()=>{
       const w = tiles.querySelector('.tile')?.offsetWidth || 320;
       tiles.scrollBy({left: w + 12, behavior:'smooth'});
     });
-    document.getElementById('tilePrev').addEventListener('click', ()=>{
+    document.getElementById('tilePrev')?.addEventListener('click', ()=>{
       const w = tiles.querySelector('.tile')?.offsetWidth || 320;
       tiles.scrollBy({left: -(w + 12), behavior:'smooth'});
     });
@@ -839,10 +792,10 @@
     const mobileMenu = document.getElementById('mobileMenu');
     const mobileClose = document.getElementById('mobileClose');
     function closeMobile(){ mobileMenu.style.display='none'; document.body.style.overflow=''; }
-    mobileOpen.addEventListener('click', ()=>{
+    mobileOpen?.addEventListener('click', ()=>{
       mobileMenu.style.display='block'; document.body.style.overflow='hidden';
     });
-    mobileClose.addEventListener('click', closeMobile);
+    mobileClose?.addEventListener('click', closeMobile);
 
     /* ---------------------------
        Simple contact form demo
@@ -870,4 +823,3 @@
   </script>
 </body>
 </html>
-
